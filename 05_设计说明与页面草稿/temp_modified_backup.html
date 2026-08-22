@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>趣味刷题小站·题库闭环版</title>
+  <title>趣味刷题小站第一版</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script>
@@ -243,7 +243,7 @@
     <header class="text-center">
       <h1 class="text-3xl md:text-5xl font-black text-black tracking-tighter" style="text-shadow: 4px 4px 0 #FFCC00;">趣味刷题小站</h1>
       <p class="mt-3 text-black font-black border-2 border-black inline-block px-4 py-1 bg-paper-white shadow-brutal-sm rotate-1">
-        题库闭环版 · 质量审核固定题库 · 自动硬盘备份
+        单端第一版 · 硅基流动双模型 · localStorage
       </p>
     </header>
 
@@ -278,18 +278,6 @@
         </div>
       </div>
 
-      <div id="backup-restore-modal" class="modal-overlay hide">
-        <div class="modal-content bg-paper-white border-brutal shadow-brutal p-5 w-96 max-h-[80vh] overflow-y-auto">
-          <div class="flex justify-between items-center mb-3">
-            <h3 class="text-xl font-black">恢复项目备份</h3>
-            <button id="backup-restore-close-btn" class="text-2xl font-black px-2 btn-brutal">×</button>
-          </div>
-          <p class="font-bold text-sm mb-3">下面是本项目自动保存的备份。选一条即可恢复，不需要在文件夹里找文件。</p>
-          <div id="backup-restore-list" class="space-y-3"></div>
-          <p class="mt-4 text-xs font-black text-gray-600 break-all">备份位置：题库闭环改版8.20\题库数据备份</p>
-        </div>
-      </div>
-
       <!-- 课程详情模态框 -->
       <div id="course-detail-modal" class="modal-overlay hide">
         <div class="modal-content bg-paper-white border-brutal shadow-brutal p-6 w-96 max-h-[80vh] overflow-y-auto">
@@ -311,21 +299,8 @@
             <i class="fa-solid fa-link text-6xl text-black mb-4"></i>
             <span class="text-3xl font-black tracking-widest">加入课程</span>
           </button>
-          <div class="grid grid-cols-2 gap-3">
-            <button id="export-backup-btn" class="bg-lime border-brutal shadow-brutal-sm py-3 px-2 font-black btn-brutal text-sm">
-              <i class="fa-solid fa-file-export mr-1"></i>导出完整备份
-            </button>
-            <button id="restore-backup-btn" class="bg-cyan border-brutal shadow-brutal-sm py-3 px-2 font-black btn-brutal text-sm">
-              <i class="fa-solid fa-clock-rotate-left mr-1"></i>恢复项目备份
-            </button>
-            <button id="import-backup-btn" class="col-span-2 bg-paper-white border-brutal shadow-brutal-sm py-3 px-2 font-black btn-brutal text-sm">
-              <i class="fa-solid fa-file-import mr-1"></i>导入外部备份文件（从其他电脑或下载文件导入）
-            </button>
-            <input id="import-backup-file" type="file" accept="application/json,.json" class="hidden" />
-          </div>
-          <p id="disk-backup-status" class="text-center text-xs font-black text-gray-700">正在检查硬盘备份…</p>
           <button id="clear-storage" class="bg-paper-white border-brutal shadow-brutal-sm py-3 px-4 font-black btn-brutal">
-            <i class="fa-solid fa-trash-can mr-2"></i>清空全部本地数据
+            <i class="fa-solid fa-trash-can mr-2"></i>清空本地测试数据
           </button>
           <button id="resume-session-btn" class="hide bg-lime border-brutal shadow-brutal-sm py-3 px-4 font-black btn-brutal">
             <i class="fa-solid fa-rotate-right mr-2"></i>继续未完成练习
@@ -364,7 +339,7 @@
             <label for="main-files" class="mt-4 w-full bg-paper-white border-brutal shadow-brutal-sm p-3 font-black btn-brutal flex items-center justify-center gap-2 cursor-pointer">
               <i class="fa-solid fa-file-circle-plus"></i><span>选择主资料（可多选）</span>
             </label>
-            <input id="main-files" type="file" multiple accept=".docx,.pptx,.txt,.md,.csv,.json,.html,.htm" class="hide" />
+            <input id="main-files" type="file" multiple class="hide" />
             <ul id="main-file-list" class="mt-3 text-sm font-bold"></ul>
           </div>
 
@@ -377,7 +352,7 @@
             <label for="supp-files" class="mt-4 w-full bg-paper-white border-brutal shadow-brutal-sm p-3 font-black btn-brutal flex items-center justify-center gap-2 cursor-pointer">
               <i class="fa-solid fa-file-circle-plus"></i><span>选择补充资料（可多选）</span>
             </label>
-            <input id="supp-files" type="file" multiple accept=".docx,.pptx,.txt,.md,.csv,.json,.html,.htm" class="hide" />
+            <input id="supp-files" type="file" multiple class="hide" />
             <ul id="supp-file-list" class="mt-3 text-sm font-bold"></ul>
             <div class="mt-3 flex items-center gap-2">
               <label class="font-bold text-sm whitespace-nowrap">生成章数：</label>
@@ -471,9 +446,6 @@
               </div>
             </div>
             <select id="review-paper-select" class="mt-3 w-full bg-paper-white border-brutal p-2 font-black text-sm"></select>
-            <button id="approve-all-btn" class="mt-3 w-full bg-magenta text-white border-brutal shadow-brutal-sm py-3 font-black btn-brutal">
-              <i class="fa-solid fa-bolt mr-2"></i>一键过审（全部题目）
-            </button>
           </div>
           <div id="review-paper-meta" class="bg-cyan border-brutal shadow-brutal-sm p-4 mb-5"></div>
           <div id="review-question-list" class="space-y-5"></div>
@@ -578,7 +550,7 @@
 
   <script type="text/plain" id="legacy-prototype-script">
     const LEGACY_DISABLED_CONFIG = {
-      apiKey: 'LEGACY_SCRIPT_DISABLED',
+      apiKey: '[REDACTED_SECRET]',
       apiUrl: 'https://api.deepseek.com/chat/completions',
       model: 'deepseek-v4-flash'
     };
@@ -1110,15 +1082,13 @@
   <script>
     (() => {
       const AI_CONFIG = window.DEEPSEEK_CONFIG || {
-        apiKey: '在这里粘贴你的硅基流动_API_Key',
-        apiUrl: window.location.protocol === 'file:'
-          ? 'http://127.0.0.1:8766/api/chat/completions'
-          : '/api/chat/completions',
-        models: ['Qwen/Qwen3-VL-8B-Thinking'],
-        requestTimeoutMs: 90000
+        apiKey: '[REDACTED_SECRET]',
+        apiUrl: '/api/chat/completions',
+        models: ['Qwen/Qwen3-VL-8B-Thinking', 'deepseek-ai/DeepSeek-V3.2'],
+        requestTimeoutMs: 120000
       };
 
-      const STORAGE_KEY = 'quiz_site_quality_v2_state';
+      const STORAGE_KEY = 'quiz_site_v1_state';
       const BANDS = ['0-39', '40-59', '60-79', '80-100'];
       const BAND_NAMES = { '0-39': '基础', '40-59': '巩固', '60-79': '提高', '80-100': '挑战' };
 
@@ -1173,8 +1143,8 @@
 
       function buildDiagnosePrompt(question, studentAnswer, triggerContext) {
         const wrongOptionKey = studentAnswer && studentAnswer.length <= 2 ? studentAnswer.trim() : '';
-        const diagnostic = getOptionDiagnostic(question, wrongOptionKey);
-        const diagText = `${diagnostic.message}（错误码：${diagnostic.error_code}）`;
+        const diagnostics = question.option_diagnostics || {};
+        const diagText = diagnostics[wrongOptionKey] || '概念混淆';
         const knowledgePoint = question.knowledge_point || '当前知识点';
         return `当前进入"错因初判"阶段。
 
@@ -1208,12 +1178,7 @@
 
       function buildPrerequisitePrompt(question, studentAnswer) {
         const knowledgePoint = question.knowledge_point || '当前知识点';
-        const prerequisiteValue = question.prerequisite;
-        const prerequisites = Array.isArray(prerequisiteValue)
-          ? prerequisiteValue.slice(0, 2)
-          : prerequisiteValue && typeof prerequisiteValue === 'object'
-            ? [`${prerequisiteValue.name || '前置概念'}：${prerequisiteValue.explanation || ''}`]
-            : [];
+        const prerequisites = (question.prerequisite || []).slice(0, 2);
         const prereqText = prerequisites.length
           ? prerequisites.map((p, i) => `${i + 1}. ${p}`).join('\n')
           : '1. 该知识点的基本定义\n2. 该知识点与相关概念的区别';
@@ -1238,45 +1203,41 @@ ${prereqText}
 
       function buildSocraticPrompt(question, originalWrongAnswer) {
         const knowledgePoint = question.knowledge_point || '当前知识点';
-        const wrongOptionKey = originalWrongAnswer && String(originalWrongAnswer).length <= 2
-          ? String(originalWrongAnswer).trim()
-          : '';
-        const diagnostic = getOptionDiagnostic(question, wrongOptionKey);
-        const diagText = diagnostic.message;
-        const explanation = question.explanation || '请结合课程定义和题目条件理解该知识点';
         let wrongAnswerText = String(originalWrongAnswer || '');
         if (wrongAnswerText.length <= 2 && question.options && Array.isArray(question.options)) {
           const matched = question.options.find(o => (o.key || '') === wrongAnswerText);
           if (matched && matched.text) wrongAnswerText = matched.text;
         }
         if (!wrongAnswerText || wrongAnswerText === '我不确定') {
-          const diagFallback = getOptionDiagnostic(question, originalWrongAnswer).message;
+          const diagFallback = (question.option_diagnostics || {})[originalWrongAnswer] || '';
           wrongAnswerText = diagFallback || `对"${knowledgePoint}"的理解有偏差`;
         }
         return `当前进入"启发式追问"阶段。
 
-题目：${question.stem}
 学生原来错误认识：${wrongAnswerText}
-标准答案：${question.answer}
 知识点：${knowledgePoint}
-学生可能的混淆：${diagText}
-题目解析：${explanation}
 
 请完成以下任务：
 
-1. 围绕学生的错误认识提出一道启发式追问，question必须是问句并以“？”结尾。
-2. 追问必须能通过选项作答，优先使用“为什么”“哪一种解释更合理”“关键区别是什么”等问法，禁止要求学生自由输入长答案。
-3. 生成两个与追问直接对应的知识选项：一个符合课程定义，一个对应学生可能的错误理解。
-4. 第三个选项固定为id="UNCERTAIN"、text="还是不清楚"。
-5. A、B选项必须是具体回答，禁止使用“成立／不成立”“正确／错误”“是／否”等通用判断词代替答案。
-6. A、B选项长度和句式应接近，不能通过措辞明显暗示正确答案。
-7. correct_option_id必须准确指向A或B中的正确答案。
-8. correct_reason只解释一个关键点，使用通俗语言，控制在30至60个汉字。
-9. 不引入新知识，不修改标准答案，不生成新题或近似练习题。
-10. question控制在25至70个汉字，只返回规定JSON。
+1. 基于学生的错误认识，推导出一个明显有问题的推论。
+2. message必须是一个完整的陈述句（结尾用句号，绝对不能用问号）。
+3. 根据message的内容，生成3个最匹配的选项，格式为：[正面判断, 反面判断, "还是不清楚"]
+  · 如果陈述是关于"是否合理"的，用 ["合理", "不合理", "还是不清楚"]
+  · 如果陈述是关于"是否正确"的，用 ["正确", "错误", "还是不清楚"]
+  · 如果陈述是关于"同意不同意"的，用 ["同意", "不同意", "还是不清楚"]
+  · 如果陈述是关于"需不需要"的，用 ["需要", "不需要", "还是不清楚"]
+  · 如果陈述是关于"成立不成立"的，用 ["成立", "不成立", "还是不清楚"]
+  · 其他情况，根据陈述语义自行选择最贴切的一对对立判断
+4. 不直接说出标准答案。
+5. 不引入新的知识点。
+6. message控制在50至70个汉字。
+
+错误示例（绝对禁止）："那么你如何确定投影运算的结果？"
+正确示例1：message="按你的理解，投影运算可以不依赖原始表结构直接确定结果。"，options=["合理", "不合理", "还是不清楚"]
+正确示例2：message="照这个逻辑，主键是允许为空值的。"，options=["正确", "错误", "还是不清楚"]
 
 输出JSON：
-{"stage":"socratic_question","question":"","interaction_type":"choice","options":[{"id":"A","text":""},{"id":"B","text":""},{"id":"UNCERTAIN","text":"还是不清楚"}],"correct_option_id":"A","correct_reason":"","should_end":false}`;
+{"stage":"socratic_question","message":"","interaction_type":"choice","options":["根据message内容动态生成"],"should_end":false}`;
       }
 
       function buildExplainComparePrompt(question) {
@@ -1305,8 +1266,8 @@ ${prereqText}
       // ===== 四阶段合一提示词：一次API拿到所有阶段内容 =====
       function buildFullGuidancePrompt(question, studentAnswer, triggerContext) {
         const wrongOptionKey = studentAnswer && studentAnswer.length <= 2 ? studentAnswer.trim() : '';
-        const diagnostic = getOptionDiagnostic(question, wrongOptionKey);
-        const diagText = diagnostic.message;
+        const diagnostics = question.option_diagnostics || {};
+        const diagText = diagnostics[wrongOptionKey] || '概念混淆';
         const knowledgePoint = question.knowledge_point || '当前知识点';
 
         let wrongAnswerText = String(studentAnswer || '');
@@ -1318,12 +1279,7 @@ ${prereqText}
           wrongAnswerText = diagText || `对"${knowledgePoint}"的理解有偏差`;
         }
 
-        const prerequisiteValue = question.prerequisite;
-        const prerequisites = Array.isArray(prerequisiteValue)
-          ? prerequisiteValue.slice(0, 2)
-          : prerequisiteValue && typeof prerequisiteValue === 'object'
-            ? [`${prerequisiteValue.name || '前置概念'}：${prerequisiteValue.explanation || ''}`]
-            : [];
+        const prerequisites = (question.prerequisite || []).slice(0, 2);
         const prereqText = prerequisites.length
           ? prerequisites.map((p, i) => `${i + 1}. ${p}`).join('\n')
           : '1. 该知识点的基本定义\n2. 该知识点与相关概念的区别';
@@ -1366,11 +1322,19 @@ STAGE 2 - prerequisite（前置追溯）：
 - 选项固定：["明白它们不同","还是分不清"]
 
 STAGE 3 - socratic_question（启发追问）：
-- 必须根据当前题干、学生所选错项及其error_code动态生成追问，不能使用固定题目。
-- message必须是一个能由选项回答的完整问句，并以问号结尾。
-- A、B必须是对该问句的两个具体知识回答：一个符合课程规则，一个对应当前误概念；第三项固定“还是不清楚”。
-- A、B禁止使用“正确/错误、成立/不成立、是/否”这类不含知识内容的通用判断词。
-- correct_option_id必须准确指向A或B，并给出correct_reason。
+- 基于学生的错误认识，推导出一个明显有问题的推论。
+- message必须是一个完整的陈述句（结尾用句号，绝对不能用问号）。
+- 根据message的内容，生成3个最匹配的选项，格式为：[正面判断, 反面判断, "还是不清楚"]
+  · 如果陈述是关于"是否合理"的，用 ["合理", "不合理", "还是不清楚"]
+  · 如果陈述是关于"是否正确"的，用 ["正确", "错误", "还是不清楚"]
+  · 如果陈述是关于"同意不同意"的，用 ["同意", "不同意", "还是不清楚"]
+  · 如果陈述是关于"需不需要"的，用 ["需要", "不需要", "还是不清楚"]
+  · 如果陈述是关于"成立不成立"的，用 ["成立", "不成立", "还是不清楚"]
+  · 其他情况，根据陈述语义自行选择最贴切的一对对立判断
+- 错误示例（绝对禁止）："那么你如何确定投影运算的结果？"
+- 正确示例1：message="按你的理解，投影运算可以不依赖原始表结构直接确定结果。"，options=["合理", "不合理", "还是不清楚"]
+- 正确示例2：message="照这个逻辑，主键是允许为空值的。"，options=["正确", "错误", "还是不清楚"]
+- 正确示例3：message="你同意这个说法：数据库的三级模式结构是为了提高数据冗余度。"，options=["同意", "不同意", "还是不清楚"]
 
 STAGE 4 - explain_compare（类比对比）：
 - 使用一个通俗类比。
@@ -1393,7 +1357,7 @@ STAGE 4 - explain_compare（类比对比）：
       // 生成本地兜底的四阶段内容（API失败时使用）
       function buildLocalFallbackStages(question, studentAnswer, triggerContext) {
         const knowledgePoint = question.knowledge_point || '当前知识点';
-        const diagText = getOptionDiagnostic(question, studentAnswer).message;
+        const diagText = (question.option_diagnostics || {})[studentAnswer] || '概念混淆';
         const isFuzzy = triggerContext === 'fuzzy';
 
         // 从题目中提取两个对比概念（简单规则）
@@ -1464,7 +1428,7 @@ STAGE 4 - explain_compare（类比对比）：
             stage: 'socratic_question',
             message: pick(socraticTemplates),
             interaction_type: 'choice',
-            options: ['这个推论成立', '这个推论不成立', '还是不清楚'],
+            options: ['合理', '不合理', '还是不清楚'],
             should_end: false
           },
           {
@@ -1520,7 +1484,7 @@ STAGE 4 - explain_compare（类比对比）：
           const shortName = model.includes('Qwen') ? 'Qwen' : model.includes('DeepSeek') ? 'DeepSeek' : model;
           return `<div class="flex justify-between border-b border-black/20 py-1"><span>${shortName}</span><span class="font-black">平均 ${avg}s / 次（近5次 ${avg5}s，成功率 ${rate}%）</span></div>`;
         }).join('');
-        el.innerHTML = `<div class="font-black mb-2 text-sm"><i class="fa-solid fa-gauge-high mr-1"></i>模型调用表现</div>${rows}`;
+        el.innerHTML = `<div class="font-black mb-2 text-sm"><i class="fa-solid fa-gauge-high mr-1"></i>模型速度对比</div>${rows}`;
       }
       let stopGenerationRequested = false;
       let activeFetchController = null;
@@ -1550,7 +1514,7 @@ STAGE 4 - explain_compare（类比对比）：
           AI_CONFIG.apiKey &&
           !AI_CONFIG.apiKey.includes('在这里粘贴') &&
           AI_CONFIG.apiUrl &&
-          getConfiguredModels().length >= 1
+          getConfiguredModels().length === 2
         );
       }
 
@@ -1769,10 +1733,7 @@ STAGE 4 - explain_compare（类比对比）：
               disableForGeneration: true
             });
           }
-          const localHint = window.location.protocol === 'file:'
-            ? '。当前页面由本地文件直接打开，请确认“启动趣味刷题小站.bat”正在运行；接口应为 http://127.0.0.1:8766/api/chat/completions'
-            : '。请确认本地题库服务仍在运行，并刷新页面后重试';
-          throw new AIInterfaceError('NETWORK_ERROR', `网络请求失败：${error.message}${localHint}`, {
+          throw new AIInterfaceError('NETWORK_ERROR', `网络请求失败：${error.message}`, {
             canFallback: true,
             disableForGeneration: false
           });
@@ -1831,9 +1792,7 @@ ${JSON.stringify(toFix.map(item => ({
             temperature: 0.3,
             maxTokens: 2048,
             generationTask: false,
-            withMetadata: true,
-            model,
-            maxAttempts: 1
+            withMetadata: true
           });
           const repairs = result.value?.repairs || [];
           if (!repairs.length) return null;
@@ -1863,12 +1822,12 @@ ${JSON.stringify(toFix.map(item => ({
 
       async function callDeepSeek(messages, options = {}) {
         if (!hasAIConfig()) {
-          throw new AIInterfaceError('AI_CONFIG_NOT_SET', '请先配置硅基流动 API Key 和至少一个模型名称', { canFallback: false });
+          throw new AIInterfaceError('AI_CONFIG_NOT_SET', '请先配置硅基流动 API Key 和两个模型名称', { canFallback: false });
         }
         const task = options.task || 'AI 调用';
         const configuredModels = options.model
           ? [options.model]
-          : getConfiguredModels();
+          : getConfiguredModels().slice(0, 2);
         const models = options.generationTask
           ? configuredModels.filter(model => !unavailableGenerationModels.has(model))
           : configuredModels;
@@ -1884,11 +1843,10 @@ ${JSON.stringify(toFix.map(item => ({
             appendGenerationProgress(`${task}：${prefix} ${model}`, isPreferredModel ? 'normal' : 'warning');
             startGenerationRequest(task, model);
           }
-          const maxAttempts = Number(options.maxAttempts || (options.generationTask ? 2 : 1));
-          let requestMessages = [...messages];
+          const maxAttempts = options.generationTask ? 3 : 2;
           for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
             try {
-              const content = await requestAIModel(model, requestMessages, options);
+              const content = await requestAIModel(model, messages, options);
               if (options.generationTask) {
                 finishGenerationRequest(`${task} · 已收到 ${model} 返回，正在解析`);
                 appendGenerationProgress(`${model} 已返回内容，开始解析`);
@@ -1947,15 +1905,6 @@ ${JSON.stringify(toFix.map(item => ({
               const shouldRetry = (isTransientInterfaceError || isModelOutputError) && attempt < maxAttempts;
               if (shouldRetry) {
                 const waitMs = isTransientInterfaceError ? 5000 : 2000;
-                if (isModelOutputError) {
-                  requestMessages = [
-                    ...messages,
-                    {
-                      role: 'user',
-                      content: `你上一次的JSON未通过校验，具体问题：${error.message}。请只修正该问题并重新输出完整JSON，不要改变已经正确的内容。`
-                    }
-                  ];
-                }
                 if (options.generationTask) {
                   finishGenerationRequest(`${task} · ${model} ${isModelOutputError ? '输出不符合要求' : '临时故障'}，${waitMs / 1000} 秒后重试`);
                   appendGenerationProgress(
@@ -1996,11 +1945,10 @@ ${JSON.stringify(toFix.map(item => ({
         }
 
         const summary = failures.map(({ model, error }) => `${model}：${error.message}`).join('；');
-        const modelCountText = failures.length > 1 ? `${failures.length}个模型` : '当前模型';
         if (failures.length && failures.every(({ error }) => error instanceof AIModelOutputError)) {
-          throw new AIModelOutputError('ALL_MODELS_OUTPUT_INVALID', `${modelCountText}的输出未通过“${task}”校验。${summary}`);
+          throw new AIModelOutputError('ALL_MODELS_OUTPUT_INVALID', `两个模型的输出均未通过“${task}”校验。${summary}`);
         }
-        throw new AIInterfaceError('ALL_MODELS_FAILED', `${modelCountText}未完成“${task}”。${summary}`, { canFallback: false });
+        throw new AIInterfaceError('ALL_MODELS_FAILED', `两个模型均未完成“${task}”。${summary}`, { canFallback: false });
       }
 
       function loadState() {
@@ -2012,210 +1960,6 @@ ${JSON.stringify(toFix.map(item => ({
         }
         loaded.courses = (loaded.courses || []).map(migrateCourse);
         return loaded;
-      }
-
-      const DISK_STATE_ENDPOINT = window.location.protocol === 'file:'
-        ? 'http://127.0.0.1:8766/api/state'
-        : '/api/state';
-      const DISK_BACKUP_LIST_ENDPOINT = `${DISK_STATE_ENDPOINT}/backups`;
-      const DISK_BACKUP_RESTORE_ENDPOINT = `${DISK_STATE_ENDPOINT}/restore`;
-      let diskSaveTimer = null;
-      let diskSaveInFlight = false;
-      let diskSavePending = false;
-      let diskPersistenceAvailable = false;
-      let diskErrorWasShown = false;
-
-      function normalizePersistentState(candidate) {
-        const loaded = candidate && typeof candidate === 'object'
-          ? candidate
-          : { courses: [], current_session: null };
-        loaded.courses = (loaded.courses || []).map(migrateCourse);
-        loaded.current_session = loaded.current_session || null;
-        return loaded;
-      }
-
-      function stateBackupPayload() {
-        return {
-          format: 'quiz-site-quality-v2',
-          exported_at: new Date().toISOString(),
-          state
-        };
-      }
-
-      function setDiskBackupStatus(message, isError = false) {
-        const element = document.getElementById('disk-backup-status');
-        if (!element) return;
-        element.textContent = message;
-        element.classList.toggle('text-red-700', isError);
-        element.classList.toggle('text-gray-700', !isError);
-      }
-
-      async function flushDiskSave() {
-        if (diskSaveInFlight) {
-          diskSavePending = true;
-          return;
-        }
-        diskSaveInFlight = true;
-        diskSavePending = false;
-        try {
-          const response = await fetch(DISK_STATE_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(stateBackupPayload())
-          });
-          if (!response.ok) throw new Error(`保存失败（${response.status}）`);
-          diskPersistenceAvailable = true;
-          diskErrorWasShown = false;
-          setDiskBackupStatus('已自动保存到项目文件夹');
-        } catch (error) {
-          setDiskBackupStatus('硬盘自动保存未连接，请用“启动趣味刷题小站.bat”打开', true);
-          if (!diskErrorWasShown) {
-            console.warn('硬盘备份未完成：', error);
-            diskErrorWasShown = true;
-          }
-        } finally {
-          diskSaveInFlight = false;
-          if (diskSavePending) flushDiskSave();
-        }
-      }
-
-      function scheduleDiskSave() {
-        clearTimeout(diskSaveTimer);
-        diskSaveTimer = setTimeout(flushDiskSave, 250);
-      }
-
-      // 页面刚好在一次操作后被关闭时，尽量把最后一次变更交给浏览器发送。
-      window.addEventListener('pagehide', () => {
-        if (!navigator.sendBeacon) return;
-        const body = new Blob([JSON.stringify(stateBackupPayload())], { type: 'application/json' });
-        navigator.sendBeacon(DISK_STATE_ENDPOINT, body);
-      });
-
-      async function restoreStateFromDisk() {
-        try {
-          const response = await fetch(DISK_STATE_ENDPOINT, { cache: 'no-store' });
-          if (response.status === 404) {
-            diskPersistenceAvailable = true;
-            setDiskBackupStatus('首次使用：将自动保存到项目文件夹');
-            return false;
-          }
-          if (!response.ok) throw new Error(`读取失败（${response.status}）`);
-          const payload = await response.json();
-          if (!payload?.state || !Array.isArray(payload.state.courses)) throw new Error('备份文件格式不正确');
-          const diskState = normalizePersistentState(payload.state);
-          // 首次升级时，浏览器旧数据可能存在而硬盘文件仍是空的；此时绝不能用空备份覆盖旧数据。
-          if (!diskState.courses.length && state.courses.length) {
-            diskPersistenceAvailable = true;
-            setDiskBackupStatus(`发现浏览器旧数据：将自动迁移 ${state.courses.length} 门课程到硬盘`);
-            return false;
-          }
-          state = diskState;
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-          diskPersistenceAvailable = true;
-          setDiskBackupStatus(`已从硬盘恢复：${state.courses.length} 门课程`);
-          return true;
-        } catch (error) {
-          setDiskBackupStatus('未能连接硬盘备份，当前仅临时保存', true);
-          console.warn('硬盘备份读取失败：', error);
-          return false;
-        }
-      }
-
-      function exportFullBackup() {
-        const blob = new Blob([JSON.stringify(stateBackupPayload(), null, 2)], { type: 'application/json;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const anchor = document.createElement('a');
-        anchor.href = url;
-        anchor.download = `趣味刷题小站完整备份_${new Date().toISOString().slice(0, 10)}.json`;
-        anchor.click();
-        URL.revokeObjectURL(url);
-        showToast('完整备份已导出，可保存到任意位置');
-      }
-
-      function formatBackupTime(value) {
-        const date = new Date(value);
-        return Number.isNaN(date.getTime()) ? String(value || '未知时间') : date.toLocaleString();
-      }
-
-      function renderDiskBackupList(backups) {
-        const list = document.getElementById('backup-restore-list');
-        if (!backups.length) {
-          list.innerHTML = '<div class="border-brutal p-3 font-black">还没有可恢复的项目备份。</div>';
-          return;
-        }
-        list.innerHTML = backups.map(backup => `
-          <div class="border-brutal shadow-brutal-sm p-3 ${backup.id === 'current' ? 'bg-lime' : 'bg-paper-white'}">
-            <p class="font-black">${escapeHtml(backup.label)}</p>
-            <p class="text-xs font-bold mt-1">${escapeHtml(formatBackupTime(backup.saved_at))} · ${backup.course_count} 门课程 · ${backup.question_count} 道题</p>
-            ${backup.valid
-              ? `<button class="restore-disk-backup-btn mt-3 w-full bg-cyan border-brutal py-2 font-black btn-brutal" data-backup-id="${escapeHtml(backup.id)}">恢复这一份</button>`
-              : '<p class="mt-2 text-sm font-black text-red-700">此备份损坏，不能恢复</p>'}
-          </div>
-        `).join('');
-        list.querySelectorAll('.restore-disk-backup-btn').forEach(button => {
-          button.addEventListener('click', () => restoreDiskBackup(button.dataset.backupId));
-        });
-      }
-
-      async function openDiskBackupRestore() {
-        const modal = document.getElementById('backup-restore-modal');
-        const list = document.getElementById('backup-restore-list');
-        modal.classList.remove('hide');
-        list.innerHTML = '<div class="border-brutal p-3 font-black">正在读取项目备份…</div>';
-        try {
-          const response = await fetch(DISK_BACKUP_LIST_ENDPOINT, { cache: 'no-store' });
-          if (!response.ok) throw new Error(`读取失败（${response.status}）`);
-          const payload = await response.json();
-          renderDiskBackupList(payload.backups || []);
-        } catch (error) {
-          list.innerHTML = `<div class="border-brutal p-3 font-black text-red-700">无法读取备份：${escapeHtml(error.message)}</div>`;
-        }
-      }
-
-      async function restoreDiskBackup(backupId) {
-        if (!confirm('恢复后，当前课程、题库、审核和学习记录将被这份备份替换。是否恢复？')) return;
-        try {
-          const response = await fetch(DISK_BACKUP_RESTORE_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id: backupId })
-          });
-          const payload = await response.json();
-          if (!response.ok || !payload?.state) throw new Error(payload?.message || `恢复失败（${response.status}）`);
-          state = normalizePersistentState(payload.state);
-          currentCourseId = null;
-          draftCourse = null;
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-          setDiskBackupStatus(`已恢复：${state.courses.length} 门课程`);
-          document.getElementById('backup-restore-modal').classList.add('hide');
-          showScreen('home');
-          showToast('项目备份已恢复');
-        } catch (error) {
-          showToast(`恢复失败：${error.message}`);
-        }
-      }
-
-      function importFullBackup(file) {
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = () => {
-          try {
-            const parsed = JSON.parse(String(reader.result || ''));
-            const importedState = parsed.state || parsed;
-            if (!importedState || !Array.isArray(importedState.courses)) throw new Error('文件中没有可识别的课程题库');
-            const questionTotal = importedState.courses.reduce((sum, course) => sum + (course.question_bank?.length || 0), 0);
-            if (!confirm(`将导入 ${importedState.courses.length} 门课程、${questionTotal} 道题，并替换当前数据。是否继续？`)) return;
-            state = normalizePersistentState(importedState);
-            currentCourseId = null;
-            draftCourse = null;
-            saveState();
-            showScreen('home');
-            showToast(`已导入 ${questionTotal} 道题，并已自动保存到硬盘`);
-          } catch (error) {
-            showToast(`导入失败：${error.message}`);
-          }
-        };
-        reader.readAsText(file, 'utf-8');
       }
 
       function cleanQuestionBank(questions) {
@@ -2255,14 +1999,20 @@ ${JSON.stringify(toFix.map(item => ({
         const migrated = { ...course };
         migrated.chapters = migrated.chapters || [];
         migrated.question_bank = cleanQuestionBank(migrated.question_bank || []);
-        migrated.question_bank = migrated.question_bank.map((question, index) => {
-          const normalized = normalizeQuestion(migrated.course_name, question, index, question.set_number || 1);
-          if (!question.quality_status) {
-            normalized.quality_status = 'archived_unverified';
-            normalized.review_status = 'pending';
-          }
-          return normalized;
-        });
+        const hasThreeSets = migrated.question_bank.some(q => Number(q.set_number) === 3);
+        if (migrated.question_bank.length && !hasThreeSets) {
+          const expanded = [];
+          migrated.question_bank.forEach((question, index) => {
+            for (let setNumber = 1; setNumber <= 3; setNumber += 1) {
+              expanded.push(makeParallelCopy(question, setNumber, index));
+            }
+          });
+          migrated.question_bank = expanded;
+        } else {
+          migrated.question_bank = migrated.question_bank.map((q, index) =>
+            normalizeQuestion(migrated.course_name, q, index, q.set_number || 1)
+          );
+        }
         migrated.status = migrated.status || 'pending_review';
         migrated.paper_reviews = ensurePaperReviews(migrated);
         syncCoursePublicationStatus(migrated);
@@ -2293,7 +2043,6 @@ ${JSON.stringify(toFix.map(item => ({
       function saveState() {
         try {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-          scheduleDiskSave();
         } catch (error) {
           console.error(error);
           showToast('本地存储空间不足，请减少课程或改用 IndexedDB');
@@ -2331,22 +2080,14 @@ ${JSON.stringify(toFix.map(item => ({
       });
 
       document.getElementById('clear-storage').addEventListener('click', () => {
-        if (!confirm('确定清空课程、题库、审核和学习记录吗？硬盘备份中的当前数据也会被清空。')) return;
+        if (!confirm('确定清空本地课程、题库和审核进度吗？')) return;
+        localStorage.removeItem(STORAGE_KEY);
         state = { courses: [], current_session: null };
         currentCourseId = null;
-        draftCourse = null;
-        saveState();
-        showToast('全部本地数据已清空，并同步到硬盘');
+        showToast('本地数据已清空');
         showScreen('home');
       });
 
-      document.getElementById('export-backup-btn').addEventListener('click', exportFullBackup);
-      document.getElementById('restore-backup-btn').addEventListener('click', openDiskBackupRestore);
-      document.getElementById('import-backup-btn').addEventListener('click', () => document.getElementById('import-backup-file').click());
-      document.getElementById('import-backup-file').addEventListener('change', event => {
-        importFullBackup(event.target.files?.[0]);
-        event.target.value = '';
-      });
       document.getElementById('resume-session-btn').addEventListener('click', resumeActiveRound);
       document.getElementById('main-files').addEventListener('change', event => handleFileSelection(event.target.files, 'main'));
       document.getElementById('supp-files').addEventListener('change', event => handleFileSelection(event.target.files, 'supplement'));
@@ -2361,7 +2102,6 @@ ${JSON.stringify(toFix.map(item => ({
       document.getElementById('export-md-btn').addEventListener('click', exportCourseToMD);
       document.getElementById('review-back-btn').addEventListener('click', () => showScreen('join'));
       document.getElementById('approve-paper-btn').addEventListener('click', approveCurrentPaper);
-      document.getElementById('approve-all-btn').addEventListener('click', approveAllQuestions);
       document.getElementById('next-review-paper-btn').addEventListener('click', nextReviewPaper);
       document.getElementById('publish-course-btn').addEventListener('click', publishCurrentCourse);
       document.getElementById('generation-return-btn').addEventListener('click', () => {
@@ -2634,7 +2374,7 @@ ${JSON.stringify(toFix.map(item => ({
             },
             {
               role: 'user',
-              content: `课程：${draftCourse.course_name}\n用户要求生成 ${document.getElementById('chapter-count').value || 12} 个章节的练习题目。主资料决定考什么和怎么考。${hasSupplement ? '优先根据补充资料（PPT/教材/大纲）识别练习章节；如补充资料不足以识别章节，则根据主资料识别。' : '根据主资料识别章节。'}两类资料冲突时以主资料为准。\n\n【硬性要求】\n1. 必须恰好输出 ${document.getElementById('chapter-count').value || 12} 个章节标题，不能多也不能少。\n2. 每个章节标题必须是"第X章 章节名称"的格式，绝对不能只有"第X章"没有章节名称。\n   · 正确示例："第一章 数据库系统概述"、"第二章 关系数据库"\n   · 错误示例（绝对禁止）："第7章"、"第8章"（只有章节号没有名称）\n3. 如果资料中某章没有明确标题，请根据该章的内容主题自行拟定一个合理的标题。\n\n只输出 {"chapters":[{"title":"章节标题"}],"assessment_blueprint":{}}。不要包含 summary 和 key_points，只要章节标题。assessment_blueprint 根据主资料生成，描述命题方向、重点、难度分布等。\n\n主资料代表片段（从全文均匀抽取，不是固定截取开头）：\n${buildCourseOutlineContext(mainText, 'main_outline')}\n${hasSupplement ? `补充资料代表片段：\n${buildCourseOutlineContext(supplementText, 'supplement_outline', 10)}` : ''}`
+              content: `课程：${draftCourse.course_name}\n用户要求生成 ${document.getElementById('chapter-count').value || 12} 个章节的练习题目。主资料决定考什么和怎么考。${hasSupplement ? '优先根据补充资料（PPT/教材/大纲）识别练习章节；如补充资料不足以识别章节，则根据主资料识别。' : '根据主资料识别章节。'}两类资料冲突时以主资料为准。\n\n【硬性要求】\n1. 必须恰好输出 ${document.getElementById('chapter-count').value || 12} 个章节标题，不能多也不能少。\n2. 每个章节标题必须是"第X章 章节名称"的格式，绝对不能只有"第X章"没有章节名称。\n   · 正确示例："第一章 数据库系统概述"、"第二章 关系数据库"\n   · 错误示例（绝对禁止）："第7章"、"第8章"（只有章节号没有名称）\n3. 如果资料中某章没有明确标题，请根据该章的内容主题自行拟定一个合理的标题。\n\n只输出 {"chapters":[{"title":"章节标题"}],"assessment_blueprint":{}}。不要包含 summary 和 key_points，只要章节标题。assessment_blueprint 根据主资料生成，描述命题方向、重点、难度分布等。\n\n主资料：${mainText.slice(0, 12000)}\n${hasSupplement ? `补充资料：${supplementText.slice(0, 12000)}` : ''}`
             }
           ], {
             json: true,
@@ -2904,52 +2644,24 @@ ${JSON.stringify(toFix.map(item => ({
         for (const file of files) {
           const isText = /\.(txt|md|csv|json|html|htm)$/i.test(file.name);
           const isOfficeZip = /\.(pptx|docx)$/i.test(file.name);
-          if (!isText && !isOfficeZip) {
-            throw new Error(`文件“${file.name}”暂不支持读取正文。请转换为 DOCX、PPTX、TXT 或 Markdown 后重新上传，不能只修改扩展名。`);
-          }
-          let content;
-          try {
-            content = isText ? await file.text() : await extractOfficeText(file);
-          } catch (error) {
-            throw new Error(`读取文件“${file.name}”失败：${error.message}`);
-          }
-          if (!String(content || '').trim()) {
-            throw new Error(`文件“${file.name}”没有提取到可用文字，请确认文件不是空白、图片扫描件或加密文档。`);
-          }
-          chunks.push(`--- ${file.name} ---\n${content}`);
+          const content = isText
+            ? await file.text()
+            : isOfficeZip
+              ? await extractOfficeText(file)
+              : `[暂未解析文件正文：${file.name}，当前仅记录文件信息。]`;
+          chunks.push(`--- ${file.name} ---\n${content.slice(0, 15000)}`);
         }
-        return chunks.join('\n\n');
+        return chunks.join('\n\n').slice(0, 50000);
       }
 
       async function extractOfficeText(file) {
         if (!window.JSZip) throw new Error('PPTX/DOCX 解析组件加载失败，请检查网络后刷新页面');
-        const buffer = await file.arrayBuffer();
-        const signature = new Uint8Array(buffer.slice(0, 4));
-        const isZipSignature = signature[0] === 0x50 && signature[1] === 0x4B && (
-          (signature[2] === 0x03 && signature[3] === 0x04) ||
-          (signature[2] === 0x05 && signature[3] === 0x06) ||
-          (signature[2] === 0x07 && signature[3] === 0x08)
-        );
-        if (!isZipSignature) {
-          throw new Error('文件内容不是有效的 Office Open XML 压缩包。它可能是旧版 DOC/PPT、加密文件，或仅被改成了 DOCX/PPTX 扩展名；请用 Word/WPS/PowerPoint“另存为”新的 DOCX/PPTX。');
-        }
-        let zip;
-        try {
-          zip = await window.JSZip.loadAsync(buffer);
-        } catch {
-          throw new Error('DOCX/PPTX 压缩结构不完整或已损坏；请打开原文件并“另存为”一个新的 DOCX/PPTX 后再上传。');
-        }
+        const zip = await window.JSZip.loadAsync(await file.arrayBuffer());
         const isPptx = /\.pptx$/i.test(file.name);
-        if (!zip.files['[Content_Types].xml']) {
-          throw new Error('文件缺少 Office 必需结构，可能不是标准 DOCX/PPTX；请重新另存为标准格式。');
-        }
         const matcher = isPptx ? /^ppt\/slides\/slide\d+\.xml$/ : /^word\/document\.xml$/;
         const paths = Object.keys(zip.files)
           .filter(path => matcher.test(path))
           .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
-        if (!paths.length) {
-          throw new Error(`文件扩展名是${isPptx ? 'PPTX' : 'DOCX'}，但内部没有找到对应正文结构；请确认格式和扩展名一致。`);
-        }
         const sections = [];
         for (const path of paths) {
           const xml = await zip.files[path].async('string');
@@ -2958,241 +2670,11 @@ ${JSON.stringify(toFix.map(item => ({
           const text = textNodes.map(node => node.textContent.trim()).filter(Boolean).join(' ');
           if (text) sections.push(isPptx ? `[${path.match(/slide\d+/)?.[0] || path}] ${text}` : text);
         }
-        if (!sections.length) {
-          throw new Error('没有提取到可读文字；文档可能全部是图片或扫描页，请先进行 OCR 或导出为 TXT。');
-        }
-        return sections.join('\n');
+        return sections.join('\n') || `[${file.name} 中未提取到可读文字]`;
       }
 
       function fileMeta(file) {
         return { name: file.name, size: file.size, type: file.type, saved_at: new Date().toISOString() };
-      }
-
-      const FORBIDDEN_QUESTION_PHRASES = [
-        '可以脱离题目条件任意解释',
-        '只与术语记忆有关，不涉及理解',
-        '与本章其他知识点没有联系',
-        '需要依据课程中的核心定义和规则进行判断',
-        '围绕当前章节核心概念进行判断',
-        '以上说法均不符合题意'
-      ];
-
-      const QUESTION_SLOT_SPECS = [
-        { slot: 1, question_type: 'single_choice', cognitive_task: '概念边界辨析', required_conditions: ['比较相邻概念的适用边界'] },
-        { slot: 2, question_type: 'single_choice', cognitive_task: '计算运算结果', required_conditions: ['给出具体关系、数据或表达式', '要求计算唯一结果'] },
-        { slot: 3, question_type: 'single_choice', cognitive_task: '识别错误结果', required_conditions: ['给出一个具体操作结果', '定位违反的规则'] },
-        { slot: 4, question_type: 'single_choice', cognitive_task: '选择正确表达式', required_conditions: ['给出明确查询或操作目标', '比较同类表达式'] },
-        { slot: 5, question_type: 'single_choice', cognitive_task: '比较相邻概念', required_conditions: ['比较两个易混概念的关键区别'] },
-        { slot: 6, question_type: 'single_choice', cognitive_task: '判断约束违反', required_conditions: ['给出具体模式、约束和操作场景'] },
-        { slot: 7, question_type: 'true_false', cognitive_task: '判断规则适用范围', required_conditions: ['陈述必须包含明确边界条件'] },
-        { slot: 8, question_type: 'true_false', cognitive_task: '判断给定结论', required_conditions: ['结论必须由资料中的规则推出'] },
-        { slot: 9, question_type: 'true_false', cognitive_task: '判断操作过程', required_conditions: ['给出具体操作或步骤'] },
-        { slot: 10, question_type: 'short_answer', cognitive_task: '说明核心步骤', required_conditions: ['要求列出关键步骤并说明依据'] }
-      ];
-
-      const BAND_DIFFICULTY_RULES = {
-        '0-39': '单一核心规则、一个明确条件、一步判断或运算，不依赖语气猜答案',
-        '40-59': '同一知识点下组合两个条件，完成一至两步判断或运算',
-        '60-79': '组合相邻知识点或多项约束，至少两步推理并识别易混边界',
-        '80-100': '在完整案例中综合多条规则，需多步推理、反例分析或方案比较'
-      };
-
-      function materialTokens(value) {
-        const stop = new Set(['第一章', '第二章', '第三章', '第四章', '第五章', '第六章', '第七章', '第八章', '第九章', '第十章', '第十一章', '第十二章', '概述', '基础', '内容', '学习']);
-        return [...new Set(String(value || '').match(/[A-Za-z][A-Za-z0-9_]{1,20}|[\u4e00-\u9fa5]{2,12}/g) || [])]
-          .filter(token => !stop.has(token));
-      }
-
-      function splitMaterialIntoChunks(text, sourceType) {
-        const normalized = String(text || '').replace(/\r/g, '').trim();
-        if (!normalized) return [];
-        const paragraphs = normalized.split(/\n{2,}|(?=^\s*(?:第[一二三四五六七八九十百0-9]+章|\d+(?:\.\d+)+)[^\n]{0,50}$)/m)
-          .map(item => item.trim()).filter(Boolean);
-        const chunks = [];
-        let buffer = '';
-        let heading = '';
-        const flush = () => {
-          if (!buffer.trim()) return;
-          const index = chunks.length + 1;
-          chunks.push({
-            chunk_id: `${sourceType}_${String(index).padStart(4, '0')}`,
-            source_type: sourceType,
-            heading: heading || `${sourceType === 'main' ? '主资料' : '补充资料'}片段${index}`,
-            text: buffer.trim()
-          });
-          buffer = '';
-        };
-        for (const paragraph of paragraphs) {
-          const headingLike = /^(?:第[一二三四五六七八九十百0-9]+章|\d+(?:\.\d+)+)\s*[^。！？]{1,50}$/.test(paragraph);
-          if (headingLike) {
-            flush();
-            heading = paragraph.slice(0, 80);
-            continue;
-          }
-          if (buffer && buffer.length + paragraph.length > 1400) flush();
-          buffer += `${buffer ? '\n\n' : ''}${paragraph}`;
-          if (buffer.length >= 900) flush();
-        }
-        flush();
-        return chunks;
-      }
-
-      function buildCourseOutlineContext(text, sourceType, maxChunks = 14) {
-        const chunks = splitMaterialIntoChunks(text, sourceType);
-        if (chunks.length <= maxChunks) return chunks.map(chunk => `[${chunk.chunk_id}] ${chunk.heading}\n${chunk.text}`).join('\n\n');
-        const selectedIndexes = new Set([0, chunks.length - 1]);
-        for (let i = 1; selectedIndexes.size < maxChunks && i < maxChunks * 2; i += 1) {
-          selectedIndexes.add(Math.round((i * (chunks.length - 1)) / (maxChunks - 1)));
-        }
-        return [...selectedIndexes].sort((a, b) => a - b).slice(0, maxChunks)
-          .map(index => `[${chunks[index].chunk_id}] ${chunks[index].heading}\n${chunks[index].text}`)
-          .join('\n\n');
-      }
-
-      function selectChapterMaterial(chapter, mainText, supplementText) {
-        const mainChunks = splitMaterialIntoChunks(mainText, 'main');
-        const supplementChunks = splitMaterialIntoChunks(supplementText, 'supplement');
-        const queryTokens = materialTokens([
-          chapter.title,
-          chapter.summary,
-          ...(chapter.key_points || [])
-        ].join(' '));
-        const rank = chunks => chunks.map(chunk => {
-          const haystack = `${chunk.heading}\n${chunk.text}`;
-          const score = queryTokens.reduce((total, token) => total + (haystack.includes(token) ? Math.min(4, token.length) : 0), 0)
-            + (String(chunk.heading).includes(String(chapter.title).replace(/^第[^章]+章[:：\s]*/, '')) ? 8 : 0);
-          return { ...chunk, match_score: score };
-        }).sort((a, b) => b.match_score - a.match_score);
-        const mainSelected = rank(mainChunks).filter((chunk, index) => chunk.match_score > 0 || index < 2).slice(0, 5);
-        const supplementSelected = rank(supplementChunks).filter((chunk, index) => chunk.match_score > 0 || index < 1).slice(0, 3);
-        if (!mainSelected.length || mainSelected.reduce((sum, chunk) => sum + chunk.text.length, 0) < 300) {
-          throw new AIModelOutputError('CHAPTER_SOURCE_INSUFFICIENT', `${chapter.title}未找到足够的主资料片段，已停止生成，避免用空泛模板补题`);
-        }
-        return {
-          chunks: [...mainSelected, ...supplementSelected],
-          chunk_ids: [...mainSelected, ...supplementSelected].map(chunk => chunk.chunk_id),
-          context: [...mainSelected, ...supplementSelected].map(chunk =>
-            `[${chunk.chunk_id}] ${chunk.heading}\n${chunk.text}`
-          ).join('\n\n')
-        };
-      }
-
-      function buildQuestionSlots(chapter, band) {
-        const blueprint = Array.isArray(chapter.knowledge_blueprint) ? chapter.knowledge_blueprint : [];
-        return QUESTION_SLOT_SPECS.map((spec, index) => {
-          const point = blueprint[index % Math.max(1, blueprint.length)] || {
-            knowledge_point_id: `kp_${slug(chapter.title)}_${index + 1}`,
-            name: (chapter.key_points || [chapter.title])[index % Math.max(1, (chapter.key_points || []).length)] || chapter.title,
-            common_misconceptions: []
-          };
-          return {
-            ...spec,
-            difficulty_band: band,
-            difficulty_rule: BAND_DIFFICULTY_RULES[band],
-            slot_id: `${slug(chapter.title)}_${band}_${String(spec.slot).padStart(2, '0')}`,
-            template_group_id: `${slug(chapter.title)}_${band}_tpl_${String(spec.slot).padStart(2, '0')}`,
-            knowledge_point_id: point.knowledge_point_id,
-            knowledge_point: point.name,
-            source_chunk_ids: point.source_chunk_ids || [],
-            target_misconceptions: point.common_misconceptions || []
-          };
-        });
-      }
-
-      function normalizeStringList(value) {
-        if (Array.isArray(value)) return value.map(item => String(item || '').trim()).filter(Boolean);
-        if (typeof value === 'string') return value.split(/[\n；;、]/).map(item => item.trim()).filter(Boolean);
-        return [];
-      }
-
-      function inferKnowledgePointSourceIds(point, material) {
-        const allowed = new Set(material.chunk_ids);
-        const supplied = normalizeStringList(
-          point.source_chunk_ids || point.source_chunks || point.chunk_ids || point.sources
-        ).filter(id => allowed.has(id));
-        if (supplied.length) return [...new Set(supplied)].slice(0, 3);
-        const tokens = materialTokens(`${point.name || point.knowledge_point || ''} ${point.core_rule || point.rule || ''}`);
-        return material.chunks.map(chunk => ({
-          id: chunk.chunk_id,
-          score: tokens.reduce((sum, token) => sum + (`${chunk.heading}\n${chunk.text}`.includes(token) ? 1 : 0), 0)
-        })).filter(item => item.score > 0).sort((a, b) => b.score - a.score).slice(0, 2).map(item => item.id);
-      }
-
-      function normalizeKnowledgeBlueprintPoint(point, index, chapter, material) {
-        const name = String(point.name || point.knowledge_point || point.title || '').trim();
-        const coreRule = String(point.core_rule || point.rule || point.definition || point.core_definition || '').trim();
-        if (!name || !coreRule) {
-          throw new AIModelOutputError('KNOWLEDGE_POINT_CORE_MISSING', `第${index + 1}个知识点缺少名称或核心规则`);
-        }
-        const boundaries = normalizeStringList(point.boundaries || point.boundary || point.scope || point.conditions);
-        const rawPrerequisite = point.prerequisite || point.prerequisites || point.prior_knowledge;
-        const prerequisite = rawPrerequisite && typeof rawPrerequisite === 'object' && !Array.isArray(rawPrerequisite)
-          ? {
-              name: String(rawPrerequisite.name || rawPrerequisite.title || '').trim(),
-              explanation: String(rawPrerequisite.explanation || rawPrerequisite.description || '').trim()
-            }
-          : { name: normalizeStringList(rawPrerequisite)[0] || '', explanation: '' };
-        const sourceChunkIds = inferKnowledgePointSourceIds(point, material);
-        if (!sourceChunkIds.length) {
-          throw new AIModelOutputError('KNOWLEDGE_POINT_GROUNDING_INVALID', `第${index + 1}个知识点无法定位到资料片段`);
-        }
-        const aliases = point.common_misconceptions || point.misconceptions || point.common_errors || point.typical_errors || point['易错点'] || point['常见混淆'];
-        const misconceptions = normalizeStringList(aliases);
-        const repairFlags = [];
-        if (misconceptions.length < 2) {
-          const boundary = boundaries[0];
-          const prereqName = prerequisite.name;
-          const candidates = [
-            boundary ? `误以为“${name}”不受“${boundary}”这一适用边界限制` : `只记住“${name}”的术语，却忽略其核心规则“${coreRule.slice(0, 36)}”`,
-            prereqName ? `混淆“${name}”与前置概念“${prereqName}”的作用和适用范围` : `把“${name}”错误套用到不满足题目条件的情形`
-          ];
-          candidates.forEach(candidate => {
-            if (misconceptions.length < 2 && !misconceptions.includes(candidate)) misconceptions.push(candidate);
-          });
-          repairFlags.push('common_misconceptions_local_repair');
-        }
-        return {
-          ...point,
-          knowledge_point_id: String(point.knowledge_point_id || point.id || `kp_${slug(chapter.title)}_${index + 1}`).trim(),
-          name,
-          core_rule: coreRule,
-          prerequisite,
-          boundaries,
-          common_misconceptions: misconceptions.slice(0, 4),
-          source_chunk_ids: sourceChunkIds,
-          repair_flags: [...new Set([...normalizeStringList(point.repair_flags), ...repairFlags])]
-        };
-      }
-
-      async function ensureChapterKnowledgeBlueprint(courseName, chapter, material) {
-        chapter.source_chunks = material.chunks;
-        chapter.source_chunk_ids = material.chunk_ids;
-        if (Array.isArray(chapter.knowledge_blueprint) && chapter.knowledge_blueprint.length >= 3) return chapter.knowledge_blueprint;
-        const result = await callDeepSeek([
-          { role: 'system', content: '你是大学课程知识蓝图分析器。只能依据给定资料，只输出合法JSON；资料没有支持的内容不得补写。' },
-          { role: 'user', content: `课程：${courseName}\n章节：${chapter.title}\n\n请提取4至8个可独立命题的知识点。每个知识点必须绑定给定的source_chunk_ids，且只追溯一层前置知识。common_misconceptions必须写2至3条具体错误认识，不能写“概念不清”“理解错误”这类空话。\n输出：{"knowledge_points":[{"knowledge_point_id":"稳定英文或拼音ID","name":"","core_rule":"","prerequisite":{"name":"","explanation":""},"boundaries":[],"common_misconceptions":["具体误解1","具体误解2"],"source_chunk_ids":[]}]}\n\n资料片段：\n${material.context}` }
-        ], {
-          json: true,
-          temperature: 0.15,
-          maxTokens: 3072,
-          task: `${chapter.title} · 建立知识点蓝图`,
-          generationTask: true,
-          withMetadata: true,
-          validate: parsed => {
-            if (!Array.isArray(parsed.knowledge_points) || parsed.knowledge_points.length < 3) {
-              throw new AIModelOutputError('KNOWLEDGE_BLUEPRINT_INVALID', '知识点蓝图不足3项');
-            }
-            parsed.knowledge_points = parsed.knowledge_points
-              .slice(0, 8)
-              .map((point, index) => normalizeKnowledgeBlueprintPoint(point, index, chapter, material));
-            const repairedCount = parsed.knowledge_points.filter(point => point.repair_flags?.length).length;
-            if (repairedCount) appendGenerationProgress(`知识蓝图中 ${repairedCount} 个知识点的辅助字段已本地规范化，保留给教师审核`, 'warning');
-            return parsed;
-          }
-        });
-        chapter.knowledge_blueprint = result.value.knowledge_points;
-        chapter.blueprint_generated_by = result.model;
-        return chapter.knowledge_blueprint;
       }
 
       // 使用用户确认的章节列表生成摘要和题目
@@ -3228,11 +2710,7 @@ ${JSON.stringify(toFix.map(item => ({
           setLoading(`正在分析章节摘要：${batchLabel}`, `${progress}%`);
           appendGenerationProgress(`正在生成章节摘要和知识点：${batchLabel}`);
 
-          const batchMaterials = batchChapters.map(chapter => {
-            const selected = selectChapterMaterial(chapter, mainText, supplementText);
-            return `【${chapter.title}相关资料】\n${selected.context}`;
-          });
-          const materialContext = batchMaterials.join('\n\n');
+          const materialContext = `主资料节选：${mainText.slice(0, 4000)}\n${hasSupplement ? `补充资料节选：${supplementText.slice(0, 3000)}` : ''}`;
           const chapterListStr = batchChapters.map((c, i) => `${batchStart + i + 1}. ${c.title}`).join('\n');
 
           const detailResult = await callDeepSeek([
@@ -3289,12 +2767,6 @@ ${JSON.stringify(toFix.map(item => ({
         const totalBatches = chapters.length * BANDS.length;
         let completedBatches = 0;
         for (const chapter of chapters) {
-          const chapterMaterial = selectChapterMaterial(chapter, mainText, supplementText);
-          await ensureChapterKnowledgeBlueprint(courseName, chapter, chapterMaterial);
-          if (draftCourse) {
-            draftCourse.chapters = chapters.map(c => ({ ...c }));
-            saveState();
-          }
           for (const band of BANDS) {
             if (stopGenerationRequested) {
               // 保存当前状态后抛出停止异常
@@ -3311,7 +2783,7 @@ ${JSON.stringify(toFix.map(item => ({
             appendGenerationProgress(`开始生成 ${chapter.title} · ${bandLabel(band)}三套题`);
             // 先移除该章节该难度的旧题，避免 generateBandBatch 返回已复用题目时重复添加
             questionBank = questionBank.filter(q => !(q.chapter === chapter.title && q.difficulty_band === band));
-            const questions = await generateBandBatch(courseName, chapter, band, assessmentBlueprint, chapterMaterial);
+            const questions = await generateBandBatch(courseName, chapter, band, assessmentBlueprint, mainText, supplementText);
             questionBank.push(...questions);
             if (draftCourse) {
               draftCourse.question_bank = [...questionBank];
@@ -3329,49 +2801,103 @@ ${JSON.stringify(toFix.map(item => ({
         return { chapters: chapters.map(c => ({ ...c })), question_bank: questionBank };
       }
 
-      async function generateBandBatch(courseName, chapter, band, assessmentBlueprint, chapterMaterial) {
-        const slots = buildQuestionSlots(chapter, band);
+      async function generateBandBatch(courseName, chapter, band, assessmentBlueprint, mainText, supplementText) {
         const baseContext = `课程：“${courseName}”
 章节：“${chapter.title}”
 目标难度：${band}（${BAND_NAMES[band]}）
-难度实现规则：${BAND_DIFFICULTY_RULES[band]}
 章节蓝图：${JSON.stringify(chapter)}
 命题蓝图：${JSON.stringify(assessmentBlueprint || {})}
-本难度固定题位：${JSON.stringify(slots)}
-只允许使用的资料片段：
-${chapterMaterial.context}`;
+主资料节选：${mainText.slice(0, 5000)}
+补充资料节选：${supplementText.slice(0, 3000)}`;
 
         const nineQuestionPrompt = `${baseContext}
-【硬性要求】你必须严格按照本次指定题位逐题生成，禁止擅自增加题目，禁止生成简答题。
+【硬性要求】你必须恰好生成 9 道题，一道不多一道不少：6 道 single_choice + 3 道 true_false。禁止生成简答题。questions 数组长度必须等于 9。
+
+【题库多样性 - 核心要求】
+同一套题内，6 道单选题必须覆盖不同的知识点，且采用不同的问法。绝对不能全部使用同一种问法模板。每套题至少使用 3 种不同的问法。多选题必须基于真实资料内容设计，不能凭空编造。
+
+【单选题的 6 种问法，每套题至少使用 3 种，以下是具体说明和示例】
+1️⃣ 概念辨析型（concept_compare）：
+   题干示例："下列关于候选码和主键的描述，正确的是？"
+   选项设计要求：每个错误选项对应一个具体的混淆点（如"候选码就是主键""主键只能有一个属性"等），不能笼统。
+
+2️⃣ 定义理解型（definition）：
+   题干示例："数据库三级模式中，负责描述数据物理存储结构的是？"
+   选项设计要求：选项包含正确答案 + 其他级别的定义（如外模式、模式、子模式等），考察对具体概念的记忆和理解。
+
+3️⃣ 规则应用型（rule_apply）：
+   题干示例："下列哪个操作违反了实体完整性约束？"
+   选项设计要求：A. 将主键设置为NULL（正确，违反实体完整性） B. 外键引用不存在的值（违反参照完整性，不是实体完整性） C. 删除有外键引用的记录（特定操作，不直接违反约束） D. 修改非主键字段的值（不违反任何约束）
+
+4️⃣ 关系判断型（relation_judge）：
+   题干示例："已知关系模式R(A,B,C)，其中A→B，B→C，则下列说法正确的是？"
+   选项设计要求：选项围绕函数依赖、传递依赖、候选码等关系理论设计。
+
+5️⃣ 计算推理型（calculation）：
+   题干示例："关系R有3个元组，S有4个元组，R和S做笛卡尔积后，结果有多少个元组？"
+   选项设计要求：A. 7（并集 3+4） B. 12（笛卡尔积 3×4，正确） C. 3（取R的元组数） D. 4（取S的元组数）
+
+6️⃣ SQL语法型（sql_syntax）：
+   题干示例："查询所有年龄大于20的学生的姓名，正确的SQL语句是？"
+   选项设计要求：A. SELECT name FROM student WHERE age>20（正确） B. SELECT name FROM student HAVING age>20（WHERE和HAVING混淆） C. SELECT name FROM student WHERE age>20 GROUP BY name（多余GROUP BY） D. SELECT name FROM student age>20（缺少WHERE关键字）
+
+【判断题的 3 种问法，每套题必须使用 3 种不同问法】
+1️⃣ 定义判断型（definition_judge）：考察对概念定义的准确理解。
+   题干示例："候选码是能唯一标识关系中每个元组的最小属性集。"
+
+2️⃣ 规则判断型（rule_judge）：考察对规则/约束的正确应用。
+   题干示例："将主键设置为NULL不会违反实体完整性约束。"
+
+3️⃣ 关系判断型（relation_judge）：考察对概念间关系的理解。
+   题干示例："如果A→B且B→C，则A→C一定成立。"
+
+【难度差异化要求】
+- 基础（0-39）：侧重单一知识点的定义记忆和基本理解，题干直接，选项围绕核心概念
+- 巩固（40-59）：涉及两个知识点的对比或简单应用，有一定干扰性
+- 提高（60-79）：涉及多个知识点的综合判断，选项需要仔细辨析
+- 挑战（80-100）：需要分析推理或综合应用，可涉及公式推导、复杂场景
+
+【选项设计硬性要求】
+1. 每个错误选项必须对应一个具体的、学生常见的错误理解，不能是"以上都对""以上都错""无法判断"等笼统选项
+2. 四个选项之间的区分度要明显，不能出现"A对B错C对D错"这种模板化设计
+3. 同一个选项不能同时出现在多道题中
+
+【绝对禁止的模板 - 以下模板一律不得使用】
+❌ 禁止："关于XXX的表述，正确的是哪一项？" + "A. XXX需要依据课程中的核心定义和规则进行判断 B. XXX可以脱离题目条件任意解释 C. XXX只与术语记忆有关，不涉及理解 D. XXX与本章其他知识点没有联系"
+❌ 禁止：所有判断题都是"理解XXX时需要结合题目给出的限定条件"
+❌ 禁止：同一套题内出现重复的知识点
+❌ 禁止：题干只有"关于XXX的表述，正确的是？"这一种问法
+
 单选题必须有 A/B/C/D 四个真实选项；不要把"模糊"放入 options。
-每题字段：slot_id,set_number,template_group_id,knowledge_point_id,knowledge_point,cognitive_task,question_type,difficulty_band,difficulty_score,ability_dimension,stem,options,answer,explanation,source_chunk_ids,source_basis,source_priority,option_diagnostics,check_statement,check_answer,check_explanation,plain_explanation,common_misconceptions,prerequisite。
+每题字段：set_number,template_group_id,knowledge_point,question_type,difficulty_band,difficulty_score,ability_dimension,stem,options,answer,explanation,source_basis,source_priority,question_category。
+question_category 必填：单选题取 "concept_compare"、"definition"、"rule_apply"、"relation_judge"、"calculation"、"sql_syntax" 之一；判断题取 "definition_judge"、"rule_judge"、"relation_judge" 之一。
 explanation 是直接展示给学生的题目解析：必须说明正确答案为什么成立；单选题还要简要指出其他选项错在哪里，判断题要说明判断依据。禁止写“依据主资料生成”“考查要求生成”“本题考查某知识点”等命题过程说明。
 source_basis 是仅供审核人员查看的命题依据：填写主资料中的具体概念、规则或案例来源，不得把 source_basis 内容复制到 explanation。
-source_chunk_ids必须从给定资料片段ID中选择，答案必须能由这些片段支持。
-【命题质量要求】
-1. 不懂本章知识的学生不能只靠语气或常识排除答案；题干必须包含明确规则、数据、关系模式、SQL、约束或具体比较任务。
-2. 严禁出现这些万能废话：“可以脱离题目条件任意解释”“只与术语记忆有关，不涉及理解”“与本章其他知识点没有联系”“需要依据课程中的核心定义和规则进行判断”“围绕当前章节核心概念进行判断”。
-3. 严禁连续使用“下列哪一项最准确地说明……”模板；每题必须完成对应slot_id规定的cognitive_task和required_conditions。
-4. 单选题的三个错误选项必须来自target_misconceptions或资料中真实的相邻概念，每个错误选项绑定{error_code,message}，不得使用明显荒谬的陪衬项。
-5. 遮住选项后仍能知道题目在问什么；四个选项必须回答同一问题、句式和长度接近，且只有一个最佳答案。
-6. 6道单选题的正确答案位置必须分布为A/B/C/D各至少1次、任何位置最多2次。
-7. 难度由条件数量、推理步骤和概念组合决定，不得用冗长措辞制造难度。
 此外，为每道题补充以下三层引导元数据字段（不参与正式计分）：
-- option_diagnostics：单选题必填，每个错误选项对应对象，如 {"A":{"error_code":"foreign_as_primary","message":"把外键误认为主键"}}
+- option_diagnostics：单选题必填，对象格式，每个错误选项对应一条错因标签，如 {"A":"把外键误认为主键","B":"忽略外键可以重复","D":"混淆外键约束和非空约束"}
 - check_statement：一道50-70字的完整判断题陈述（必须是可以判断对错的陈述句，结尾用句号，不能是问句或短语），用于第三层确认理解。例如："数据库三级模式中，物理存储描述的结构名称是内模式。"
 - check_answer：true或false，判断题的正确答案
 - check_explanation：判断错误后的简短解释（20-40字）
 - plain_explanation：一个通俗比喻或一句话解释（30-50字）
 - common_misconceptions：该知识点常见的2-3个混淆点，数组格式
 - prerequisite：学习该知识点需要的前置知识，数组格式
-【再次强调】只输出 {"questions":[...]}，questions 数组元素数必须与本次指定题位数完全一致。`;
+【再次强调】只输出 {"questions":[...]}，questions 数组必须恰好包含 9 个元素，6 道 single_choice、3 道 true_false。`;
 
         const shortAnswerPrompt = `${baseContext}
-严格按照题位10生成1道short_answer简答题。必须包含scoring_rubric（至少3条），每条包含point、score、missing_point_tag。
-字段：slot_id,set_number,template_group_id,knowledge_point_id,knowledge_point,cognitive_task,question_type,difficulty_band,difficulty_score,ability_dimension,stem,answer,explanation,scoring_rubric,source_chunk_ids,source_basis,source_priority。
+生成 1 道 short_answer 简答题。必须包含 scoring_rubric（评分标准数组，至少 3 条）。
+
+【简答题问法多样性】
+禁止使用"请简述XXX的核心含义及其在XXX中的作用"这种模板。必须根据知识点内容设计具体问题，例如：
+- 分析型："请分析数据库三级模式结构中，外模式/模式/内模式分别解决什么问题？三者之间的关系是什么？"
+- 对比型："请对比关系模型中候选码和主键的异同，并说明各自的作用。"
+- 应用型："某学生成绩管理系统中，需要设计表结构来存储学生、课程和选课信息。请说明你会如何设计主键和外键，并解释原因。"
+- 解释型："请解释为什么数据库系统要设置三级模式结构，每一级模式的作用是什么？"
+
+字段：set_number,template_group_id,knowledge_point,question_type,difficulty_band,difficulty_score,ability_dimension,stem,answer,explanation,scoring_rubric,source_basis,source_priority,question_category。
+question_category 取 "short_answer"。
 explanation 是直接展示给学生的作答解析：应结合标准答案说明答题思路以及各评分点之间的关系。禁止写“依据主资料生成”“考查要求生成”“本题考查某知识点”等命题过程说明。
 source_basis 是仅供审核人员查看的命题依据：填写主资料中的具体概念、规则或案例来源，不得把 source_basis 内容复制到 explanation。
-此外，也需要补充三层引导元数据字段：check_statement、check_answer、check_explanation、plain_explanation、common_misconceptions、prerequisite（简答题不需要option_diagnostics）。禁止万能废话，必须要求学生运用资料中的具体规则或步骤。
+此外，也需要补充三层引导元数据字段：check_statement、check_answer、check_explanation、plain_explanation、common_misconceptions、prerequisite（简答题不需要 option_diagnostics）。
 【再次强调】只输出 {"questions":[{}]}，questions 数组必须恰好包含 1 道 short_answer 简答题。`;
 
         const generatedSets = [];
@@ -3404,83 +2930,65 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
             appendGenerationProgress(`${taskName} 已有 ${savedSet.length} 题（不足10题），将重新生成`, 'warning');
           }
 
-          // 每次只生成 3 道客观题，减少模板坍缩并让失败可局部重试。
-          const answerSchedules = {
-            1: ['A', 'B', 'C', 'D', 'A', 'B'],
-            2: ['B', 'C', 'D', 'A', 'B', 'C'],
-            3: ['C', 'D', 'A', 'B', 'C', 'D']
-          };
-          const objectiveSlots = slots.slice(0, 9).map(slot => ({
-            ...slot,
-            expected_answer: slot.question_type === 'single_choice'
-              ? answerSchedules[setNumber][Number(slot.slot) - 1]
-              : undefined
-          }));
-          const generatedObjective = [];
-          for (let batchStart = 0; batchStart < objectiveSlots.length; batchStart += 3) {
-            const batchSlots = objectiveSlots.slice(batchStart, batchStart + 3);
-            const batchNumber = Math.floor(batchStart / 3) + 1;
-            const batchTaskName = `${taskName} · 客观题小批次${batchNumber}/3`;
-            startGenerationRequest(batchTaskName, null);
-            const motherQuestions = motherSet
-              .filter(question => batchSlots.some(slot => slot.slot_id === question.slot_id))
-              .map(question => ({
-                slot_id: question.slot_id,
-                template_group_id: question.template_group_id,
-                knowledge_point_id: question.knowledge_point_id,
-                knowledge_point: question.knowledge_point,
-                question_type: question.question_type,
-                cognitive_task: question.cognitive_task,
-                stem: question.stem,
-                options: question.options,
-                answer: question.answer
-              }));
-            const batchInstruction = setNumber === 1
-              ? `生成第1套母题。set_number全部为1。必须逐一填写这些题位：${JSON.stringify(batchSlots)}`
-              : `生成第${setNumber}套平行等值变式。保持slot_id、template_group_id、knowledge_point_id、题型和认知任务一致，但必须更换数据、关系模式、约束或案例，不能只改名词。对于题位2、3、4、6，题干数据和四个答案选项都必须随新案例重新计算或重写，禁止沿用母题选项。set_number全部为${setNumber}。\n指定题位：${JSON.stringify(batchSlots)}\n对应母题：${JSON.stringify(motherQuestions)}`;
-            const batchResult = await callDeepSeek([
-              { role: 'system', content: `你是严格的题库生成器，只输出合法JSON。本次必须恰好生成${batchSlots.length}道题，并逐一对应指定slot_id。` },
-              { role: 'user', content: `${batchInstruction}\n${nineQuestionPrompt}` }
-            ], {
-              json: true,
-              temperature: setNumber === 1 ? 0.25 : 0.35,
-              maxTokens: 4096,
-              task: batchTaskName,
-              generationTask: true,
-              withMetadata: true,
-              validate: parsed => {
-                if (!Array.isArray(parsed.questions) || parsed.questions.length !== batchSlots.length) {
-                  throw new AIModelOutputError('QUESTION_COUNT_INVALID', `小批次要求${batchSlots.length}题，实际${parsed.questions?.length || 0}题`);
-                }
-                parsed.questions.forEach((question, index) => {
-                  const slot = batchSlots[index];
-                  question.slot_id = question.slot_id || slot.slot_id;
-                  question.template_group_id = slot.template_group_id;
-                  question.knowledge_point_id = slot.knowledge_point_id;
-                  question.knowledge_point = question.knowledge_point || slot.knowledge_point;
-                  question.cognitive_task = question.cognitive_task || slot.cognitive_task;
-                  question.question_type = normalizeGeneratedQuestionType(question.question_type);
-                  if (question.slot_id !== slot.slot_id || question.question_type !== slot.question_type) {
-                    throw new AIModelOutputError('QUESTION_SLOT_MISMATCH', `${slot.slot_id}未按规定题型生成`);
-                  }
-                  repairGeneratedQuestionForSlot(question, slot, chapterMaterial.chunk_ids);
-                  validateStudentExplanation(question.explanation, index);
-                  if (slot.expected_answer && normalizeAnswer(question.answer) !== slot.expected_answer) {
-                    throw new AIModelOutputError('ANSWER_POSITION_INVALID', `${slot.slot_id}正确答案必须为${slot.expected_answer}`);
-                  }
-                  validateGeneratedQuestionQuality(question, slot, chapterMaterial.chunk_ids, [...generatedObjective, ...parsed.questions.slice(0, index)]);
-                });
-                return parsed;
+          // 生成 9 道客观题
+          const nineTaskName = `${taskName} · 客观题`;
+          startGenerationRequest(nineTaskName, null);
+          const nineInstruction = setNumber === 1
+            ? '生成第 1 套母题。set_number 全部为 1，并为每道题设置稳定、唯一的 template_group_id。'
+            : `根据下面第 1 套母题生成第 ${setNumber} 套平行等值变式。保持每道题的 template_group_id、知识点、题型、能力维度和难度近似一致。set_number 全部为 ${setNumber}。\n第 1 套母题：${JSON.stringify(motherSet.filter(q => q.question_type !== 'short_answer').map(q => ({ template_group_id: q.template_group_id, knowledge_point: q.knowledge_point, question_type: q.question_type, difficulty_band: q.difficulty_band, ability_dimension: q.ability_dimension, stem: q.stem })))}`;
+          const nineResult = await callDeepSeek([
+            { role: 'system', content: '你是严格的题库生成器，只输出合法 JSON。必须恰好生成 9 道题：6 道 single_choice 单选 + 3 道 true_false 判断。questions 数组长度必须等于 9，不能多也不能少。' },
+            { role: 'user', content: `${nineInstruction}\n${nineQuestionPrompt}` }
+          ], {
+            json: true,
+            temperature: setNumber === 1 ? 0.2 : 0.3,
+            maxTokens: 8192,
+            task: nineTaskName,
+            generationTask: true,
+            withMetadata: true,
+            validate: (parsed, model) => {
+              if (!Array.isArray(parsed.questions)) throw new AIModelOutputError('QUESTION_ARRAY_MISSING', '没有返回 questions 数组');
+              if (parsed.questions.length < 9) throw new AIModelOutputError('QUESTION_COUNT_INVALID', `客观题不足 9 题，实际 ${parsed.questions.length} 题`);
+              if (parsed.questions.length > 9) {
+                const originalCount = parsed.questions.length;
+                parsed.questions = parsed.questions.slice(0, 9);
+                appendGenerationProgress(`客观题输出 ${originalCount} 题（超出），已自动截取前 9 题`, 'warning');
               }
-            });
-            generatedObjective.push(...batchResult.value.questions.map(question => repairGeneratedAnswer({
-              ...question,
+              const singles = parsed.questions.filter(q => normalizeGeneratedQuestionType(q.question_type) === 'single_choice');
+              const judges = parsed.questions.filter(q => normalizeGeneratedQuestionType(q.question_type) === 'true_false');
+              if (singles.length !== 6 || judges.length !== 3) throw new AIModelOutputError('QUESTION_TYPE_COUNT_INVALID', `客观题类型错误：单选${singles.length}、判断${judges.length}（要求 6+3）`);
+              // 收集哪些题缺哪些字段，而不是直接抛错
+              const missingMap = {};
+              parsed.questions.forEach((question, index) => {
+                try {
+                  validateStudentExplanation(question.explanation, index);
+                } catch (e) {
+                  if (e instanceof AIModelOutputError) {
+                    missingMap[index] = { ...(missingMap[index] || {}), explanation: true };
+                  } else {
+                    throw e;
+                  }
+                }
+              });
+              if (Object.keys(missingMap).length > 0) {
+                const firstMissing = Object.keys(missingMap)[0];
+                throw new AIModelOutputError(
+                  'QUESTION_EXPLANATION_MISSING',
+                  `第${Number(firstMissing) + 1}题缺少面向学生的解析`,
+                  { missingMap, questions: parsed.questions }
+                );
+              }
+              return parsed;
+            }
+          });
+          const nineQuestions = normalizeBandQuestions(courseName, chapter.title, band,
+            nineResult.value.questions.map((q, i) => repairGeneratedAnswer({
+              ...q,
               set_number: setNumber,
-              question_type: normalizeGeneratedQuestionType(question.question_type),
-              generated_by: batchResult.model
-            })));
-          }
-          const nineQuestions = normalizeBandQuestions(courseName, chapter.title, band, generatedObjective);
+              question_type: normalizeGeneratedQuestionType(q.question_type),
+              generated_by: nineResult.model
+            }))
+          );
 
           // 生成 1 道简答题
           const shortTaskName = `${taskName} · 简答题`;
@@ -3501,21 +3009,8 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
             validate: (parsed, model) => {
               if (!Array.isArray(parsed.questions) || !parsed.questions.length) throw new AIModelOutputError('SHORT_ANSWER_MISSING', '没有返回简答题');
               const sa = parsed.questions[0];
-              const shortSlot = slots[9];
-              sa.slot_id = shortSlot.slot_id;
-              sa.template_group_id = shortSlot.template_group_id;
-              sa.knowledge_point_id = shortSlot.knowledge_point_id;
-              sa.knowledge_point = sa.knowledge_point || shortSlot.knowledge_point;
-              sa.cognitive_task = shortSlot.cognitive_task;
-              repairGeneratedQuestionForSlot(sa, shortSlot, chapterMaterial.chunk_ids);
               if (normalizeGeneratedQuestionType(sa.question_type) !== 'short_answer') throw new AIModelOutputError('SHORT_ANSWER_TYPE_WRONG', '简答题类型错误');
               if (!String(sa.stem || sa.question || '').trim() || !String(sa.answer || '').trim()) throw new AIModelOutputError('SHORT_ANSWER_FIELD_MISSING', '简答题缺少题干或答案');
-              const rubric = coerceScoringRubric(sa.scoring_rubric);
-              if (rubric.length < 3 || rubric.some(item => !item.missing_point_tag)) {
-                throw new AIModelOutputError('SCORING_RUBRIC_INVALID', '简答题至少需要3个带missing_point_tag的评分点');
-              }
-              sa.scoring_rubric = rubric;
-              validateGeneratedQuestionQuality(sa, shortSlot, chapterMaterial.chunk_ids, nineQuestions);
               try {
                 validateStudentExplanation(sa.explanation, 0);
               } catch (e) {
@@ -3541,8 +3036,6 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
 
           const currentSet = [...nineQuestions, shortNormalized];
           validateGeneratedSet(currentSet, setNumber);
-          if (setNumber > 1) validateParallelVariation(motherSet, currentSet, setNumber);
-          await reviewGeneratedSetWithAI(currentSet, chapterMaterial, taskName);
           if (setNumber === 1) {
             motherSet = currentSet;
             motherShortAnswer = shortNormalized;
@@ -3667,6 +3160,7 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
         replacement.plain_explanation = replacement.plain_explanation || originalQuestion.plain_explanation || '';
         replacement.common_misconceptions = replacement.common_misconceptions || originalQuestion.common_misconceptions || [];
         replacement.prerequisite = replacement.prerequisite || originalQuestion.prerequisite || [];
+        replacement.question_category = replacement.question_category || originalQuestion.question_category || 'definition';
         return { ...replacement, question_type: type, generated_by: model };
       }
 
@@ -3748,247 +3242,12 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
 
       function coerceScoringRubric(value) {
         const rubric = Array.isArray(value)
-          ? value.map((item, index) => {
-              if (item && typeof item === 'object') {
-                return {
-                  point: String(item.point || item.criterion || '').trim(),
-                  score: Number(item.score || 0),
-                  missing_point_tag: String(item.missing_point_tag || `missing_${index + 1}`).trim()
-                };
-              }
-              return { point: String(item || '').trim(), score: 0, missing_point_tag: `missing_${index + 1}` };
-            }).filter(item => item.point)
-          : String(value || '').split(/[\n；;]/).map((item, index) => ({
-              point: item.trim(), score: 0, missing_point_tag: `missing_${index + 1}`
-            })).filter(item => item.point);
+          ? value.map(item => String(item || '').trim()).filter(Boolean)
+          : String(value || '').split(/[\n；;]/).map(item => item.trim()).filter(Boolean);
         if (!rubric.length) {
           throw new AIModelOutputError('SCORING_RUBRIC_MISSING', '简答题缺少评分点');
         }
         return rubric;
-      }
-
-      function repairGeneratedQuestionForSlot(question, slot, allowedChunkIds) {
-        const [minDifficulty, maxDifficulty] = String(slot.difficulty_band || '0-100').split('-').map(Number);
-        const suppliedDifficulty = Number(question.difficulty_score);
-        if (!Number.isFinite(suppliedDifficulty) || suppliedDifficulty < minDifficulty || suppliedDifficulty > maxDifficulty) {
-          question.difficulty_score = Math.round((minDifficulty + maxDifficulty) / 2);
-          question.repair_flags = [...new Set([...normalizeStringList(question.repair_flags), 'difficulty_score_local_repair'])];
-        }
-        const suppliedSources = normalizeStringList(question.source_chunk_ids || question.source_chunks || question.chunk_ids)
-          .filter(id => allowedChunkIds.includes(id));
-        question.source_chunk_ids = suppliedSources.length
-          ? [...new Set(suppliedSources)].slice(0, 3)
-          : normalizeStringList(slot.source_chunk_ids).filter(id => allowedChunkIds.includes(id)).slice(0, 3);
-        if (!suppliedSources.length && question.source_chunk_ids.length) {
-          question.repair_flags = [...new Set([...normalizeStringList(question.repair_flags), 'source_ids_inherited_from_blueprint'])];
-        }
-        question.common_misconceptions = normalizeStringList(
-          question.common_misconceptions || question.misconceptions || slot.target_misconceptions
-        );
-        if (question.question_type !== 'single_choice') return question;
-
-        const normalizedOptions = normalizeOptions(coerceOptionArray(question.options, true));
-        const oldDiagnostics = normalizeOptionDiagnostics(question.option_diagnostics);
-        let correctIndex = ['A', 'B', 'C', 'D'].indexOf(normalizeAnswer(question.answer));
-        if (correctIndex < 0) {
-          correctIndex = normalizedOptions.findIndex(option => String(option.text).trim() === String(question.answer || '').trim());
-        }
-        if (correctIndex < 0) {
-          throw new AIModelOutputError('CHOICE_ANSWER_UNRESOLVED', `${slot.slot_id}无法确定正确选项`);
-        }
-        const entries = normalizedOptions.map((option, index) => ({
-          text: option.text,
-          diagnostic: oldDiagnostics[String.fromCharCode(65 + index)]
-        }));
-        const expectedIndex = slot.expected_answer ? ['A', 'B', 'C', 'D'].indexOf(slot.expected_answer) : correctIndex;
-        if (expectedIndex >= 0 && expectedIndex !== correctIndex) {
-          [entries[correctIndex], entries[expectedIndex]] = [entries[expectedIndex], entries[correctIndex]];
-          question.repair_flags = [...new Set([...normalizeStringList(question.repair_flags), 'answer_position_local_repair'])];
-          correctIndex = expectedIndex;
-        }
-        question.options = entries.map((entry, index) => ({ key: String.fromCharCode(65 + index), text: entry.text }));
-        question.answer = String.fromCharCode(65 + correctIndex);
-        const diagnostics = {};
-        const misconceptions = normalizeStringList(slot.target_misconceptions);
-        entries.forEach((entry, index) => {
-          const key = String.fromCharCode(65 + index);
-          if (index === correctIndex) return;
-          const fallbackMisconception = misconceptions[index % Math.max(1, misconceptions.length)] || `把选项“${entry.text}”误当成满足题干全部条件的结论`;
-          diagnostics[key] = entry.diagnostic?.message
-            ? entry.diagnostic
-            : { error_code: `slot_${slot.slot}_wrong_${key.toLowerCase()}`, message: fallbackMisconception };
-        });
-        question.option_diagnostics = diagnostics;
-        if (Object.keys(oldDiagnostics).length < 3) {
-          question.repair_flags = [...new Set([...normalizeStringList(question.repair_flags), 'option_diagnostics_local_repair'])];
-        }
-        return question;
-      }
-
-      function normalizeOptionDiagnostics(value) {
-        if (!value || typeof value !== 'object' || Array.isArray(value)) return {};
-        return Object.fromEntries(Object.entries(value).map(([key, diagnostic]) => {
-          const normalizedKey = normalizeAnswer(key);
-          if (diagnostic && typeof diagnostic === 'object') {
-            return [normalizedKey, {
-              error_code: String(diagnostic.error_code || `wrong_${normalizedKey.toLowerCase()}`).trim(),
-              message: String(diagnostic.message || '').trim()
-            }];
-          }
-          return [normalizedKey, {
-            error_code: `wrong_${normalizedKey.toLowerCase()}`,
-            message: String(diagnostic || '').trim()
-          }];
-        }));
-      }
-
-      function getOptionDiagnostic(question, optionKey) {
-        const diagnostics = normalizeOptionDiagnostics(question?.option_diagnostics);
-        return diagnostics[normalizeAnswer(optionKey)] || {
-          error_code: 'unclassified_error',
-          message: '当前错项尚未绑定具体误概念'
-        };
-      }
-
-      function questionFingerprint(value) {
-        return String(value || '')
-          .toLowerCase()
-          .replace(/\d+(?:\.\d+)?/g, '#')
-          .replace(/[\s，。！？；：、“”‘’（）()【】\[\]{}<>《》]/g, '');
-      }
-
-      function bigramSimilarity(left, right) {
-        const make = value => {
-          const text = questionFingerprint(value);
-          const set = new Set();
-          for (let i = 0; i < text.length - 1; i += 1) set.add(text.slice(i, i + 2));
-          return set;
-        };
-        const a = make(left);
-        const b = make(right);
-        if (!a.size || !b.size) return 0;
-        const intersection = [...a].filter(item => b.has(item)).length;
-        return (2 * intersection) / (a.size + b.size);
-      }
-
-      function validateGeneratedQuestionQuality(question, slot, allowedChunkIds, existingQuestions = []) {
-        const stem = String(question.stem || question.question || '').trim();
-        if (stem.length < 12) throw new AIModelOutputError('QUESTION_STEM_TOO_SHORT', `${slot.slot_id}题干过短`);
-        const [minDifficulty, maxDifficulty] = String(slot.difficulty_band || '0-100').split('-').map(Number);
-        const difficultyScore = Number(question.difficulty_score);
-        if (!Number.isFinite(difficultyScore) || difficultyScore < minDifficulty || difficultyScore > maxDifficulty) {
-          throw new AIModelOutputError('DIFFICULTY_SCORE_INVALID', `${slot.slot_id}难度分值不在${slot.difficulty_band}范围内`);
-        }
-        const fullText = `${stem}\n${JSON.stringify(question.options || [])}`;
-        const forbidden = FORBIDDEN_QUESTION_PHRASES.find(phrase => fullText.includes(phrase));
-        if (forbidden) throw new AIModelOutputError('GENERIC_PHRASE_DETECTED', `${slot.slot_id}含万能废话：“${forbidden}”`);
-        if (/下列哪一项最准确地说明/.test(stem)) {
-          throw new AIModelOutputError('GENERIC_STEM_TEMPLATE', `${slot.slot_id}使用了被禁用的通用题干模板`);
-        }
-        const sourceIds = Array.isArray(question.source_chunk_ids) ? question.source_chunk_ids : [];
-        if (!sourceIds.length || sourceIds.some(id => !allowedChunkIds.includes(id))) {
-          throw new AIModelOutputError('QUESTION_GROUNDING_INVALID', `${slot.slot_id}未绑定有效资料片段`);
-        }
-        if (String(question.knowledge_point_id || '') !== String(slot.knowledge_point_id || '')) {
-          throw new AIModelOutputError('KNOWLEDGE_POINT_MISMATCH', `${slot.slot_id}偏离指定知识点`);
-        }
-        if (question.question_type === 'single_choice') {
-          const options = coerceOptionArray(question.options, true);
-          const answer = normalizeAnswer(question.answer);
-          const diagnostics = normalizeOptionDiagnostics(question.option_diagnostics);
-          const optionTexts = options.map(option => String(option.text ?? option.label ?? option.value ?? option));
-          if (new Set(optionTexts.map(questionFingerprint)).size !== 4) {
-            throw new AIModelOutputError('DUPLICATE_OPTIONS', `${slot.slot_id}含重复或仅换名词的选项`);
-          }
-          for (const key of ['A', 'B', 'C', 'D'].filter(key => key !== answer)) {
-            if (!diagnostics[key]?.error_code || diagnostics[key].message.length < 4) {
-              throw new AIModelOutputError('OPTION_DIAGNOSTIC_MISSING', `${slot.slot_id}错项${key}未绑定有效错误诊断`);
-            }
-          }
-        }
-        const duplicate = existingQuestions.find(item =>
-          item && item.slot_id !== question.slot_id && bigramSimilarity(item.stem || item.question, stem) >= 0.90
-        );
-        if (duplicate) throw new AIModelOutputError('NEAR_DUPLICATE_QUESTION', `${slot.slot_id}与同套其他题高度相似`);
-      }
-
-      async function reviewGeneratedSetWithAI(questions, chapterMaterial, taskName) {
-        let reviewResult;
-        try {
-          reviewResult = await callDeepSeek([
-            { role: 'system', content: '你是独立题库质检员。只能依据资料审核，不替出题模型找借口。只输出合法JSON。' },
-            { role: 'user', content: `请逐题检查：答案是否由资料支持、是否必须使用学科知识、题干与选项是否匹配、错项是否真实且有迷惑性、是否存在多个正确答案。\n输出 {"reviews":[{"slot_id":"","pass":true,"verified_answer":"A/正确/错误/文本","issues":[]}]}。任何一项不满足都必须pass=false。\n\n资料：\n${chapterMaterial.context}\n\n题组：${JSON.stringify(questions.map(question => ({ slot_id: question.slot_id, stem: question.stem, options: question.options, answer: question.answer, explanation: question.explanation, source_chunk_ids: question.source_chunk_ids })))}` }
-          ], {
-            json: true,
-            temperature: 0.05,
-            maxTokens: 4096,
-            task: `${taskName} · 独立AI质检`,
-            generationTask: true,
-            withMetadata: true,
-            maxAttempts: 1,
-            validate: parsed => {
-              if (!Array.isArray(parsed.reviews) || parsed.reviews.length !== questions.length) {
-                throw new AIModelOutputError('AI_REVIEW_INCOMPLETE', 'AI质检未覆盖整套题');
-              }
-              const bySlot = new Map(parsed.reviews.map(review => [review.slot_id, review]));
-              parsed.reviews = questions.map(question => bySlot.get(question.slot_id)).filter(Boolean);
-              if (parsed.reviews.length !== questions.length) {
-                throw new AIModelOutputError('AI_REVIEW_SLOT_MISSING', 'AI质检结果缺少题位');
-              }
-              return parsed;
-            }
-          });
-        } catch (error) {
-          questions.forEach(question => {
-            question.quality_status = 'teacher_review_required';
-            question.ai_quality_review = { pass: false, issues: [`AI质检未完成：${error.message}`] };
-          });
-          appendGenerationProgress(`${taskName} AI质检未完成，题组已保存为“必须教师审核”，不重复等待`, 'warning');
-          return;
-        }
-        questions.forEach((question, index) => {
-          const review = reviewResult.value.reviews[index];
-          const verified = normalizeAnswer(review.verified_answer);
-          const answerConflict = question.question_type !== 'short_answer' && verified && verified !== normalizeAnswer(question.answer);
-          const variationWarning = String(question.parallel_variation_warning || '').trim();
-          question.quality_status = review.pass === true && !answerConflict && !variationWarning ? 'ai_review_passed' : 'teacher_review_required';
-          question.ai_quality_review = {
-            ...review,
-            issues: [
-              ...(Array.isArray(review.issues) ? review.issues : []),
-              ...(answerConflict ? ['AI复核答案与生成答案冲突'] : []),
-              ...(variationWarning ? [variationWarning] : [])
-            ]
-          };
-          question.ai_quality_reviewed_by = reviewResult.model;
-        });
-        const flagged = questions.filter(question => question.quality_status === 'teacher_review_required').length;
-        if (flagged) appendGenerationProgress(`${taskName} 有 ${flagged} 题被AI质检标记为“必须教师审核”，未重复生成整套`, 'warning');
-      }
-
-      function validateParallelVariation(motherSet, currentSet, setNumber) {
-        let warningCount = 0;
-        currentSet.forEach(question => {
-          const mother = motherSet.find(item => item.slot_id === question.slot_id);
-          if (!mother) throw new AIModelOutputError('PARALLEL_TEMPLATE_MISSING', `第${setNumber}套${question.slot_id}找不到对应母题`);
-          if (mother.template_group_id !== question.template_group_id || mother.question_type !== question.question_type) {
-            throw new AIModelOutputError('PARALLEL_TEMPLATE_CHANGED', `第${setNumber}套${question.slot_id}改变了模板或题型`);
-          }
-          const exactText = String(mother.stem || '').replace(/\s+/g, '') === String(question.stem || '').replace(/\s+/g, '');
-          const similarity = bigramSimilarity(mother.stem, question.stem);
-          const slotNumber = Number(String(question.slot_id || '').match(/(\d{2})$/)?.[1] || 0);
-          const dataDrivenSlot = [2, 3, 4, 6].includes(slotNumber);
-          const optionsAlsoIdentical = JSON.stringify(mother.options || []) === JSON.stringify(question.options || []);
-          if (exactText || (!dataDrivenSlot && similarity >= 0.92) || (dataDrivenSlot && optionsAlsoIdentical)) {
-            warningCount += 1;
-            question.parallel_variation_warning = `与第1套对应题过于相似（相似度${Math.round(similarity * 100)}%），需要教师确认是否为有效平行变式`;
-            question.repair_flags = [...new Set([...normalizeStringList(question.repair_flags), 'parallel_variation_teacher_review'])];
-          }
-        });
-        if (warningCount) {
-          appendGenerationProgress(`第${setNumber}套有 ${warningCount} 题的平行变式差异不足，已保留并标记为必须教师审核`, 'warning');
-        }
-        return warningCount;
       }
 
       function coerceOptionArray(value, strict = false) {
@@ -4040,20 +3299,7 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
           if (!['A', 'B', 'C', 'D'].includes(normalizeAnswer(question.answer))) {
             throw new AIModelOutputError('CHOICE_ANSWER_INVALID', `第${index + 1}道单选题答案必须为 A/B/C/D`);
           }
-          const diagnostics = normalizeOptionDiagnostics(question.option_diagnostics);
-          const wrongKeys = ['A', 'B', 'C', 'D'].filter(key => key !== normalizeAnswer(question.answer));
-          if (wrongKeys.some(key => !diagnostics[key]?.error_code || !diagnostics[key]?.message)) {
-            throw new AIModelOutputError('OPTION_DIAGNOSTIC_MISSING', `第${index + 1}道单选题缺少错项诊断`);
-          }
         });
-        const answerCounts = singles.reduce((counts, question) => {
-          const key = normalizeAnswer(question.answer);
-          counts[key] = (counts[key] || 0) + 1;
-          return counts;
-        }, {});
-        if (['A', 'B', 'C', 'D'].some(key => !answerCounts[key] || answerCounts[key] > 2)) {
-          throw new AIModelOutputError('ANSWER_DISTRIBUTION_INVALID', `第${setNumber}套单选答案位置分布不合格`);
-        }
         judges.forEach((question, index) => {
           let raw = String(question.answer || '').trim().toLowerCase().replace(/[.。，,、\s]+$/, '');
           // 尝试从 check_answer 推断
@@ -4067,6 +3313,22 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
             throw new AIModelOutputError('TRUE_FALSE_ANSWER_INVALID', `第${index + 1}道判断题答案必须为"正确"或"错误"，实际为"${question.answer}"`);
           }
         });
+        // 多样性校验：单选题至少使用 3 种不同问法
+        const singleCategories = new Set(singles.map(q => q.question_category || ''));
+        if (singleCategories.size < 3) {
+          throw new AIModelOutputError(
+            'QUESTION_DIVERSITY_LOW',
+            `第${setNumber}套单选题问法多样性不足：6 道题仅使用了 ${singleCategories.size} 种问法（${[...singleCategories].join('、')}），要求至少 3 种`
+          );
+        }
+        // 多样性校验：判断题必须使用 3 种不同问法
+        const judgeCategories = new Set(judges.map(q => q.question_category || ''));
+        if (judgeCategories.size < 3) {
+          throw new AIModelOutputError(
+            'JUDGE_DIVERSITY_LOW',
+            `第${setNumber}套判断题问法多样性不足：3 道题仅使用了 ${judgeCategories.size} 种问法（${[...judgeCategories].join('、')}），要求 3 种`
+          );
+        }
       }
 
       function normalizeBandQuestions(courseName, chapterTitle, band, questions) {
@@ -4111,25 +3373,21 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
           set_number: Number(setNumber || question.set_number || 1),
           template_group_id: question.template_group_id || `tpl_${index}`,
           knowledge_point: question.knowledge_point || '未标注知识点',
-          knowledge_point_id: question.knowledge_point_id || `kp_${slug(question.knowledge_point || 'unknown')}`,
-          slot_id: question.slot_id || '',
           question_type: type,
           difficulty_band: question.difficulty_band || '40-59',
           difficulty_score: Number(question.difficulty_score || 50),
           ability_dimension: question.ability_dimension || '概念理解',
-          cognitive_task: question.cognitive_task || question.ability_dimension || '概念理解',
           stem: question.stem || question.question || '',
           options,
           answer: question.answer || '',
           explanation: studentFacingExplanation(question, type, options),
-          scoring_rubric: type === 'short_answer' ? coerceScoringRubric(question.scoring_rubric || []) : [],
-          source_chunk_ids: Array.isArray(question.source_chunk_ids) ? question.source_chunk_ids : [],
+          scoring_rubric: question.scoring_rubric || [],
           source_basis: question.source_basis || '由主资料优先生成',
           source_priority: question.source_priority || 'main_based',
           review_status: question.review_status || 'pending',
-          quality_status: question.quality_status || 'local_checks_passed',
+          question_category: question.question_category || 'definition',
           // 三层引导元数据字段
-          option_diagnostics: normalizeOptionDiagnostics(question.option_diagnostics),
+          option_diagnostics: question.option_diagnostics || {},
           check_statement: question.check_statement || '',
           check_answer: question.check_answer !== undefined ? question.check_answer : (question.answer === '正确'),
           check_explanation: question.check_explanation || '',
@@ -4148,7 +3406,7 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
           return { key: String.fromCharCode(65 + index), text: option.text ?? option.label ?? String(option.value ?? '') };
         });
         while (normalized.length < 4) {
-          normalized.push({ key: String.fromCharCode(65 + normalized.length), text: '【缺失选项，需重新生成】' });
+          normalized.push({ key: String.fromCharCode(65 + normalized.length), text: '以上说法均不符合题意' });
         }
         return normalized;
       }
@@ -4411,17 +3669,13 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
             <span class="tiny-label font-black bg-black text-white px-2 py-1">第${question.set_number}套 · 第${(index % 10) + 1}题 · ${typeName(question.question_type)}</span>
             <span class="tiny-label font-black bg-cyan border-2 border-black px-2 py-1">${question.difficulty_score}分</span>
           </div>
-          <div class="mt-3 text-xs font-black">${escapeHtml(question.knowledge_point)} · ${escapeHtml(question.cognitive_task || question.ability_dimension)}</div>
-          <div class="mt-2 text-xs font-bold"><strong>题位：</strong>${escapeHtml(question.slot_id || '未标注')} · <strong>质检：</strong>${escapeHtml(question.quality_status || '未质检')}</div>
-          ${question.ai_quality_review?.issues?.length ? `<div class="mt-2 bg-orange border-2 border-black p-2 text-xs font-bold"><strong>AI质检提醒：</strong>${escapeHtml(question.ai_quality_review.issues.join('；'))}</div>` : ''}
+          <div class="mt-3 text-xs font-black">${escapeHtml(question.knowledge_point)} · ${escapeHtml(question.ability_dimension)}</div>
           <h3 class="mt-3 text-base font-black leading-relaxed">${escapeHtml(question.stem)}</h3>
           ${options}
           <div class="mt-3 bg-primary border-2 border-black p-2 text-sm font-bold"><strong>答案：</strong>${escapeHtml(question.answer)}</div>
           <div class="mt-2 bg-pastel-grey border-2 border-black p-2 text-sm font-bold"><strong>解析：</strong>${escapeHtml(question.explanation)}</div>
-          ${question.question_type === 'short_answer' ? `<div class="mt-2 bg-cyan border-2 border-black p-2 text-sm font-bold"><strong>评分点：</strong>${escapeHtml((question.scoring_rubric || []).map(item => typeof item === 'object' ? item.point : item).join('；'))}</div>` : ''}
+          ${question.question_type === 'short_answer' ? `<div class="mt-2 bg-cyan border-2 border-black p-2 text-sm font-bold"><strong>评分点：</strong>${escapeHtml(question.scoring_rubric.join('；'))}</div>` : ''}
           <div class="mt-2 text-xs font-bold"><strong>依据：</strong>${escapeHtml(question.source_basis)}</div>
-          <div class="mt-2 text-xs font-bold"><strong>资料片段：</strong>${escapeHtml((question.source_chunk_ids || []).join('、') || '未绑定')}</div>
-          ${question.question_type === 'single_choice' ? `<div class="mt-2 text-xs font-bold"><strong>错项诊断：</strong>${escapeHtml(Object.entries(normalizeOptionDiagnostics(question.option_diagnostics)).filter(([key]) => key !== normalizeAnswer(question.answer)).map(([key, item]) => `${key}:${item.error_code}—${item.message}`).join('；'))}</div>` : ''}
           <div class="grid grid-cols-3 gap-2 mt-4">
             <button data-review-edit="${question.question_id}" class="bg-cyan border-2 border-black py-2 font-black btn-brutal" title="编辑"><i class="fa-solid fa-pen"></i></button>
             <button data-review-regenerate="${question.question_id}" class="bg-primary border-2 border-black py-2 font-black btn-brutal" title="重新生成"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
@@ -4490,11 +3744,6 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
       function approveQuestion(questionId) {
         const question = getQuestionById(questionId);
         if (!question) return;
-        if (question.quality_status === 'teacher_review_required') {
-          question.quality_status = 'teacher_approved_override';
-        } else if (!['ai_review_passed', 'teacher_edited', 'teacher_approved_override'].includes(question.quality_status)) {
-          return showToast('该题缺少资料或结构校验，不能进入正式题库');
-        }
         question.review_status = 'approved';
         const course = getCurrentCourse();
         const paper = getPaperForQuestion(course, question);
@@ -4524,13 +3773,11 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
         const explanation = prompt('编辑标准解析：', question.explanation);
         if (explanation !== null) question.explanation = explanation.trim();
         if (question.question_type === 'short_answer') {
-          const rubricText = (question.scoring_rubric || []).map(item => typeof item === 'object' ? item.point : item).join('；');
-          const rubric = prompt('编辑评分点（使用；分隔）：', rubricText);
-          if (rubric !== null) question.scoring_rubric = rubric.split(/[；;]/).map((item, index) => ({ point: item.trim(), score: 0, missing_point_tag: `manual_missing_${index + 1}` })).filter(item => item.point);
+          const rubric = prompt('编辑评分点（使用；分隔）：', question.scoring_rubric.join('；'));
+          if (rubric !== null) question.scoring_rubric = rubric.split(/[；;]/).map(item => item.trim()).filter(Boolean);
         }
         const source = prompt('编辑题目来源依据：', question.source_basis);
         if (source !== null) question.source_basis = source.trim();
-        question.quality_status = 'teacher_edited';
         invalidateQuestionPaper(question);
         saveState();
         renderReviewPaper();
@@ -4574,23 +3821,6 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
           difficulty_band: question.difficulty_band,
           review_status: 'pending'
         }, Date.now(), question.set_number);
-        try {
-          const course = getCurrentCourse();
-          const chapter = course?.chapters?.find(item => item.title === question.chapter);
-          const sourceChunks = chapter?.source_chunks || [];
-          const chapterMaterial = {
-            chunks: sourceChunks,
-            chunk_ids: sourceChunks.map(item => item.chunk_id),
-            context: sourceChunks.map(item => `[${item.chunk_id}] ${item.heading}\n${item.text}`).join('\n\n')
-          };
-          const slot = buildQuestionSlots(chapter, question.difficulty_band).find(item => item.slot_id === question.slot_id);
-          if (!slot || !chapterMaterial.context) throw new Error('缺少该题的知识蓝图或资料片段');
-          validateGeneratedQuestionQuality(normalized, slot, chapterMaterial.chunk_ids, course.question_bank.filter(item => item.question_id !== question.question_id));
-          await reviewGeneratedSetWithAI([normalized], chapterMaterial, `重新生成题目 ${question.question_id}`);
-        } catch (qualityError) {
-          showToast(`替换题未通过质量门禁：${qualityError.message}`);
-          return;
-        }
         Object.assign(question, normalized);
         invalidateQuestionPaper(question);
         saveState();
@@ -4605,9 +3835,6 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
         if (group.papers.length !== 3 || questions.length !== 30) {
           return showToast(`本组应有 3 套 30 题，当前只有 ${questions.length} 题，不能通过`);
         }
-        if (questions.some(question => !['ai_review_passed', 'teacher_edited', 'teacher_approved_override'].includes(question.quality_status))) {
-          return showToast('本组仍有AI标记题尚未逐题确认，不能整组通过');
-        }
         questions.forEach(question => { question.review_status = 'approved'; });
         group.papers.forEach(paper => {
           paper.status = 'approved';
@@ -4618,27 +3845,6 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
         saveState();
         renderReviewPaper();
         showToast(isChapterApproved(course, group.chapter) ? `${group.chapter}已全部审核，可进入练习` : '本难度三套题已整组通过');
-      }
-
-      function approveAllQuestions() {
-        const course = getCurrentCourse();
-        if (!course) return;
-        if (course.question_bank.some(question => !['ai_review_passed', 'teacher_edited', 'teacher_approved_override'].includes(question.quality_status))) {
-          return showToast('仍有AI标记题尚未逐题确认，不能一键过审');
-        }
-        const groups = getReviewGroups(course);
-        const totalQuestions = course.question_bank.length;
-        if (!confirm(`确定要一键过审吗？\n\n将通过 ${groups.length} 组 · 共 ${totalQuestions} 道题\n此操作不可撤销。`)) return;
-        course.question_bank.forEach(question => { question.review_status = 'approved'; });
-        course.paper_reviews.forEach(paper => {
-          paper.status = 'approved';
-          paper.reviewed_question_count = 10;
-          paper.reviewed_at = new Date().toISOString();
-        });
-        syncCoursePublicationStatus(course);
-        saveState();
-        renderReviewPaper();
-        showToast(`已一键通过全部 ${totalQuestions} 道题`);
       }
 
       function nextReviewPaper() {
@@ -4725,8 +3931,6 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
           next_set_by_band: { '0-39': 1, '40-59': 1, '60-79': 1, '80-100': 1 },
           active_round: null,
           round_history: [],
-          knowledge_state: {},
-          weak_knowledge_points: [],
           report: null
         };
         saveState();
@@ -4775,13 +3979,7 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
           Number(question.set_number) === setNumber
         );
         if (questions.length !== 10) return showToast(`该题组数量异常：${questions.length}/10`);
-        const weakOrder = new Map((session.weak_knowledge_points || []).map((item, index) => [item.knowledge_point_id, index]));
-        const orderedQuestions = [...questions].sort((left, right) => {
-          const leftRank = weakOrder.has(left.knowledge_point_id) ? weakOrder.get(left.knowledge_point_id) : 999;
-          const rightRank = weakOrder.has(right.knowledge_point_id) ? weakOrder.get(right.knowledge_point_id) : 999;
-          return leftRank - rightRank;
-        });
-        startQuiz({ mode: 'practice', questions: orderedQuestions, band, setNumber });
+        startQuiz({ mode: 'practice', questions, band, setNumber });
       }
 
       function startQuiz({ mode, questions, band, setNumber }) {
@@ -4874,24 +4072,7 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
         const score = correct ? points : 0;
         activeQuiz.score += score;
         const studentAnswer = fuzzy ? '我不确定' : answer;
-        const priorErrors = (state.current_session?.round_history || []).flatMap(round => round.answers || [])
-          .filter(item => item.knowledge_point_id === question.knowledge_point_id && !item.correct).length;
-        const diagnostic = !correct && !fuzzy && question.question_type === 'single_choice'
-          ? getOptionDiagnostic(question, answer)
-          : null;
-        activeQuiz.answers.push({
-          question_id: question.question_id,
-          knowledge_point_id: question.knowledge_point_id,
-          knowledge_point: question.knowledge_point,
-          student_answer: studentAnswer,
-          correct,
-          fuzzy,
-          score,
-          error_code: diagnostic?.error_code || (fuzzy ? 'uncertain' : ''),
-          error_message: diagnostic?.message || '',
-          guidance_status: correct ? 'not_needed' : 'available',
-          learning_state: correct ? 'independent_correct' : fuzzy ? 'uncertain' : priorErrors > 0 ? 'repeated_error' : 'wrong'
-        });
+        activeQuiz.answers.push({ question_id: question.question_id, student_answer: studentAnswer, correct, fuzzy, score });
         persistActiveQuiz();
         document.getElementById('quiz-score').textContent = `${activeQuiz.score} 分`;
         if (correct) {
@@ -4961,21 +4142,7 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
         }
         const score = Math.max(0, Math.min(25, Number(result.score || 0)));
         activeQuiz.score += score;
-        const shortCorrect = score >= 18;
-        activeQuiz.answers.push({
-          question_id: question.question_id,
-          knowledge_point_id: question.knowledge_point_id,
-          knowledge_point: question.knowledge_point,
-          student_answer: answer,
-          correct: shortCorrect,
-          fuzzy: false,
-          score,
-          error_code: shortCorrect ? '' : (result.missing_points?.[0] || 'short_answer_missing_point'),
-          error_message: shortCorrect ? '' : (result.feedback || '简答题关键评分点未覆盖'),
-          guidance_status: shortCorrect ? 'not_needed' : 'available',
-          learning_state: shortCorrect ? 'independent_correct' : 'wrong',
-          short_result: result
-        });
+        activeQuiz.answers.push({ question_id: question.question_id, student_answer: answer, correct: score >= 18, fuzzy: false, score, short_result: result });
         persistActiveQuiz();
         document.getElementById('quiz-score').textContent = `${activeQuiz.score} 分`;
         showQuestionFeedback({
@@ -5033,16 +4200,6 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
         messages.querySelectorAll('.thinking-row').forEach(el => el.remove());
       }
 
-      function updateCurrentAnswerGuidanceStatus(status, extra = {}) {
-        if (!activeQuiz?.answers?.length) return;
-        const question = activeQuiz.questions[activeQuiz.index];
-        const answer = [...activeQuiz.answers].reverse().find(item => item.question_id === question?.question_id);
-        if (!answer) return;
-        answer.guidance_status = status;
-        Object.assign(answer, extra);
-        persistActiveQuiz();
-      }
-
       async function triggerAiGuidance(question, studentAnswer, reason) {
         const panel = document.getElementById('ai-panel');
         const optionsEl = document.getElementById('ai-guidance-options');
@@ -5053,14 +4210,13 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
         chatRow.classList.add('hide');
         document.getElementById('ai-messages').innerHTML = '';
         showThinkingBubble();
-        updateCurrentAnswerGuidanceStatus('started');
 
         const triggerContext = reason.includes('不确定') ? 'fuzzy'
           : reason.includes('简答') ? 'short_answer'
           : reason.includes('答错') ? 'wrong'
           : 'view_answer';
 
-        // 使用当前配置的 Qwen 作为默认模型
+        // 使用 DeepSeek 作为默认模型（内容质量更好）
         const defaultModel = getConfiguredModels().find(m => /Qwen/i.test(m)) || getConfiguredModels()[0];
 
         let guidance;
@@ -5078,7 +4234,7 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
           });
 
           const parsed = typeof response === 'string' ? parseAIJson(response, 'AI 引导响应') : response;
-          guidance = normalizeGuidanceResponse(parsed, question);
+          guidance = normalizeGuidanceResponse(parsed);
           guidance.stage = 'diagnose';
         } catch (error) {
           console.warn('AI 引导失败，使用本地兜底', error);
@@ -5113,13 +4269,13 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
         renderGuidanceStep(guidance);
       }
 
-      async function handleGuidanceChoice(choice, choiceLabel = choice) {
+      async function handleGuidanceChoice(choice) {
         if (!activeGuidance || activeGuidance.stage === 'complete') return;
         const optionsEl = document.getElementById('ai-guidance-options');
         optionsEl.classList.add('hide');
         optionsEl.innerHTML = '';
 
-        appendUserBubble(choiceLabel);
+        appendUserBubble(choice);
 
         const currentStage = activeGuidance.stage;
         const stageDef = GUIDANCE_STAGE_FLOW[currentStage];
@@ -5128,20 +4284,21 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
         if (!nextStageName) return;
 
         const question = activeQuiz.questions[activeQuiz.index];
-        activeGuidance.history.push({ role: 'user', content: choiceLabel });
+        activeGuidance.history.push({ role: 'user', content: choice });
 
-        // socratic_question 阶段即时反馈：按模型返回的选项ID精确判定，不根据文案猜测
+        // socratic_question 阶段即时反馈（本地判定，不调 API）
         if (currentStage === 'socratic_question') {
-          const lastResponse = activeGuidance.lastResponse || {};
-          const correctOptionId = lastResponse.correct_option_id;
-          const correctReason = lastResponse.correct_reason || '请结合课程定义和题目条件理解这个知识点。';
+          const lastMsg = activeGuidance.lastResponse ? activeGuidance.lastResponse.message : '';
+          // 判断用户选项是肯定性还是否定性（动态选项适配）
+          const isNegative = /(不|没|否|错|反对)/.test(choice) && !/(不要|不行)=/.test(choice);
+          const isPositive = !isNegative && /(合理|正确|同意|需要|成立|对|支持|认可)/.test(choice);
           let feedback;
-          if (choice === correctOptionId) {
-            feedback = `选择正确。${correctReason}我们继续。`;
-          } else if (choice === 'UNCERTAIN') {
-            feedback = `没关系。${correctReason}我们继续。`;
+          if (isNegative) {
+            feedback = '判断正确。这个推论确实有问题——' + lastMsg + '这种说法忽略了课程定义和题目的约束。我们继续。';
+          } else if (isPositive) {
+            feedback = '其实这个推论是有问题的。' + lastMsg + '这种说法忽略了课程定义和题目的约束，不能成立。我们继续。';
           } else {
-            feedback = `这个选项不准确。${correctReason}我们继续。`;
+            feedback = '没关系。这个推论其实忽略了课程定义和题目的约束，是有问题的。我们继续。';
           }
           appendAIBubble(feedback, '反馈');
           activeGuidance.history.push({ role: 'assistant', content: feedback });
@@ -5163,7 +4320,6 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
           activeGuidance.stage = 'complete';
           activeGuidance.lastResponse = completeMsg;
           activeGuidance.history.push({ role: 'assistant', content: JSON.stringify(completeMsg) });
-          updateCurrentAnswerGuidanceStatus('guided_completed', { learning_state: 'guided_completed' });
           renderGuidanceStep(completeMsg);
           document.getElementById('next-question-btn').classList.remove('hide');
           return;
@@ -5199,7 +4355,7 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
             model: defaultModel
           });
           const parsed = typeof response === 'string' ? parseAIJson(response, 'AI 引导响应') : response;
-          guidance = normalizeGuidanceResponse({ ...parsed, stage: nextStageName }, question);
+          guidance = normalizeGuidanceResponse(parsed);
           guidance.stage = nextStageName;
         } catch (error) {
           console.warn('AI 引导追问失败，使用本地兜底', error);
@@ -5280,11 +4436,11 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
         }
         if (!checkStatement) {
           // 第 3 层：用错误选项诊断中的陈述（答案为 false）
-          const diagnostics = normalizeOptionDiagnostics(question.option_diagnostics);
+          const diagnostics = question.option_diagnostics || {};
           const wrongKeys = Object.keys(diagnostics).filter(k => k !== question.answer);
           if (wrongKeys.length > 0) {
             const firstWrong = wrongKeys[0];
-            const diagText = diagnostics[firstWrong]?.message || '';
+            const diagText = diagnostics[firstWrong];
             if (question.options && Array.isArray(question.options)) {
               const wrongOpt = question.options.find(o => (o.key || '') === firstWrong);
               if (wrongOpt && wrongOpt.text) {
@@ -5362,10 +4518,6 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
             activeGuidance.lastResponse = completeMsg;
             activeGuidance.history.push({ role: 'user', content: symbol });
             activeGuidance.history.push({ role: 'assistant', content: JSON.stringify(completeMsg) });
-            updateCurrentAnswerGuidanceStatus('guided_completed', {
-              learning_state: isCorrect ? 'guided_completed' : 'still_unclear',
-              judge_correct: isCorrect
-            });
             renderGuidanceStep(completeMsg);
             document.getElementById('next-question-btn').classList.remove('hide');
           });
@@ -5376,75 +4528,33 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
         activeGuidance.stage = 'judge';
       }
 
-      function buildLocalSocraticGuidance(question = {}) {
-        const knowledgePoint = question.knowledge_point || '当前知识点';
-        const options = Array.isArray(question.options) ? question.options : [];
-        const correctOption = options.find(option => normalizeAnswer(option.key) === normalizeAnswer(question.answer));
-        const wrongOption = options.find(option => normalizeAnswer(option.key) !== normalizeAnswer(question.answer));
-        const correctText = String(correctOption?.text || question.explanation || `符合“${knowledgePoint}”的定义与题干条件`).trim().slice(0, 80);
-        const wrongText = String(wrongOption?.text || getOptionDiagnostic(question, wrongOption?.key).message || `忽略“${knowledgePoint}”的适用条件`).trim().slice(0, 80);
-        const swap = String(question.question_id || question.slot_id || knowledgePoint).length % 2 === 0;
-        const reason = String(question.explanation || `理解“${knowledgePoint}”时，需要同时依据课程定义和题目给出的具体条件。`)
-          .replace(/\s+/g, ' ')
-          .trim()
-          .slice(0, 90);
-        return {
-          stage: 'socratic_question',
-          message: `回到这道题的“${knowledgePoint}”，哪一种解释同时满足题干条件和课程规则？`,
-          interaction_type: 'choice',
-          options: [
-            { id: 'A', text: swap ? wrongText : correctText },
-            { id: 'B', text: swap ? correctText : wrongText },
-            { id: 'UNCERTAIN', text: '还是不清楚' }
-          ],
-          correct_option_id: swap ? 'B' : 'A',
-          correct_reason: reason,
-          should_end: false,
-          used_local_fallback: true
-        };
-      }
-
-      function normalizeSocraticGuidance(parsed, question = {}) {
-        const message = String(parsed.question || parsed.message || '').replace(/\s+/g, ' ').trim();
-        const rawOptions = Array.isArray(parsed.options) ? parsed.options : [];
-        const options = rawOptions.map((option) => ({
-          id: String(option && option.id || '').trim().toUpperCase(),
-          text: String(option && option.text || '').replace(/\s+/g, ' ').trim()
-        }));
-        const correctOptionId = String(parsed.correct_option_id || '').trim().toUpperCase();
-        const correctReason = String(parsed.correct_reason || '').replace(/\s+/g, ' ').trim();
-        const ids = options.map(option => option.id);
-        const optionA = options.find(option => option.id === 'A');
-        const optionB = options.find(option => option.id === 'B');
-        const uncertain = options.find(option => option.id === 'UNCERTAIN');
-        const genericAnswer = /^(成立|不成立|正确|错误|对|错|是|否|可以|不可以|能|不能)$/;
-
-        const valid = message.length >= 10 && message.length <= 100
-          && /[？?]$/.test(message)
-          && options.length === 3
-          && new Set(ids).size === 3
-          && ['A', 'B', 'UNCERTAIN'].every(id => ids.includes(id))
-          && optionA && optionA.text.length >= 4 && optionA.text.length <= 80
-          && optionB && optionB.text.length >= 4 && optionB.text.length <= 80
-          && optionA.text !== optionB.text
-          && !genericAnswer.test(optionA.text)
-          && !genericAnswer.test(optionB.text)
-          && uncertain && uncertain.text === '还是不清楚'
-          && ['A', 'B'].includes(correctOptionId)
-          && correctReason.length >= 8 && correctReason.length <= 120;
-
-        if (!valid) return buildLocalSocraticGuidance(question);
-
-        return {
-          stage: 'socratic_question',
-          message,
-          interaction_type: 'choice',
-          options,
-          correct_option_id: correctOptionId,
-          correct_reason: correctReason,
-          should_end: false,
-          used_local_fallback: false
-        };
+      function normalizeSocraticMessage(msg) {
+        let text = String(msg || '').trim();
+        if (!text) return text;
+        // 如果已经是陈述句（结尾是句号、感叹号等非问号），直接返回
+        if (!/[？?]$/.test(text)) return text;
+        // 把问句转成陈述句，按常见模式匹配
+        // 模式1："是否需要/应该/要X？" → "按照这个推论，不需要X。"
+        const needMatch = text.match(/是否(需要|应该|要|必须|得)([^？?]+)[？?]$/);
+        if (needMatch) return `按这个推论，不${needMatch[1]}${needMatch[2].trim()}。`;
+        // 模式2："X是否需要/应该Y？" → "按这个推论，X不需要Y。"
+        const needMatch2 = text.match(/([^，。；]{1,20})是否(需要|应该|要|必须|得)([^？?]+)[？?]$/);
+        if (needMatch2) return `按这个推论，${needMatch2[1].trim()}不${needMatch2[2]}${needMatch2[3].trim()}。`;
+        // 模式3："你同意/支持/认可X吗？" → "你同意X这个说法。"
+        const agreeMatch = text.match(/你(同意|支持|认可|觉得对|认为对)([^吗呢]*)(吗|呢)?[？?]$/);
+        if (agreeMatch) return `你${agreeMatch[1]}${agreeMatch[2].trim()}这个说法。`;
+        // 模式4："X对吗？/X正确吗？/X是这样吗？" → "X是正确的。"
+        const rightMatch = text.match(/(.{2,60})(对|正确|是这样|没错|成立)(吗|呢)?[？?]$/);
+        if (rightMatch) return `${rightMatch[1].trim()}是${rightMatch[2]}的。`;
+        // 模式5："X和Y有关系吗？/X取决于Y吗？" → "X和Y没有任何关系。"
+        const relateMatch = text.match(/(.{2,40})(和|与|跟)(.{2,40})(有|存在|取决于|需要)(关系|关联|联系|依赖)(吗|呢)?[？?]$/);
+        if (relateMatch) return `${relateMatch[1].trim()}${relateMatch[2]}${relateMatch[3].trim()}没${relateMatch[4]}${relateMatch[5]}。`;
+        // 模式6："能/可以/可能X吗？" → "能X。"
+        const canMatch = text.match(/(能|可以|可能)([^吗呢？?]{2,60})(吗|呢)?[？?]$/);
+        if (canMatch) return `${canMatch[1]}${canMatch[2].trim()}。`;
+        // 模式7：去掉结尾的"吗？""呢？"，改成句号
+        const simplified = text.replace(/(吗|呢)[？?]$/, '。').replace(/[？?]$/, '。');
+        return simplified;
       }
 
       function matchSocraticOptions(msg) {
@@ -5510,15 +4620,11 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
         return text;
       }
 
-      function normalizeGuidanceResponse(parsed, question = {}) {
+      function normalizeGuidanceResponse(parsed) {
         const stage = ['diagnose', 'prerequisite', 'socratic_question', 'explain_compare', 'judge', 'complete'].includes(parsed.stage)
           ? parsed.stage : 'diagnose';
         let message = String(parsed.message || '');
         let options = Array.isArray(parsed.options) ? parsed.options : [];
-
-        if (stage === 'socratic_question') {
-          return normalizeSocraticGuidance(parsed, question);
-        }
 
         // diagnose 阶段：检查并修复句式语病
         if (stage === 'diagnose') {
@@ -5528,6 +4634,27 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
           }
         }
 
+        // socratic 阶段：
+        // 1. 先把消息规范化为陈述句
+        // 2. 优先使用AI返回的options（必须是3个有效选项）
+        // 3. AI没返回对的话，用启发式匹配兜底
+        // 4. 最后兜底用"合理/不合理/还是不清楚"
+        if (stage === 'socratic_question') {
+          const normalized = normalizeSocraticMessage(message);
+          if (normalized && normalized !== message) {
+            message = normalized;
+          }
+          // 检查AI返回的options是否有效：必须是3个字符串，最后一个通常是"还是不清楚"
+          const aiOptionsValid = options.length === 3
+            && options.every(o => typeof o === 'string' && o.trim().length > 0);
+          if (aiOptionsValid) {
+            // AI返回的options有效，直接使用
+          } else {
+            // AI没返回对，用启发式匹配
+            const matched = matchSocraticOptions(message);
+            options = matched;
+          }
+        }
         return {
           stage,
           message,
@@ -5556,12 +4683,10 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
           optionsEl.classList.remove('hide');
           chatRow.classList.add('hide');
           guidance.options.forEach((option) => {
-            const optionId = typeof option === 'object' ? option.id : option;
-            const optionText = typeof option === 'object' ? option.text : option;
             const btn = document.createElement('button');
             btn.className = 'w-full text-left p-3 border-brutal bg-paper-white font-black btn-brutal';
-            btn.textContent = optionText;
-            btn.addEventListener('click', () => handleGuidanceChoice(optionId, optionText));
+            btn.textContent = option;
+            btn.addEventListener('click', () => handleGuidanceChoice(option));
             optionsEl.appendChild(btn);
           });
         } else {
@@ -5583,7 +4708,7 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
               should_end: false
             };
           }
-          const diagText = getOptionDiagnostic(question, studentAnswer).message;
+          const diagText = (question.option_diagnostics || {})[studentAnswer] || '概念混淆';
           return {
             stage: 'diagnose',
             message: `你可能${diagText}。你能区分这个知识点和容易混淆的概念吗？`,
@@ -5602,7 +4727,12 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
         }
 
         if (stage === 'socratic_question') {
-          return buildLocalSocraticGuidance(question);
+          return {
+            stage: 'socratic_question',
+            message: `按你原来的理解，${knowledgePoint}中缺失的部分不需要任何依据就能确定。`,
+            interaction_type: 'choice', options: ['合理', '不合理', '还是不清楚'],
+            should_end: false
+          };
         }
 
         if (stage === 'explain_compare') {
@@ -5722,41 +4852,10 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
         const wrong = activeQuiz.answers.filter(answer => !answer.correct).length;
         const fuzzy = activeQuiz.answers.filter(answer => answer.fuzzy).length;
         const nextBand = adjustBand(completedBand, score);
-        const knowledgeState = { ...(session.knowledge_state || {}) };
-        activeQuiz.answers.forEach(answer => {
-          const question = activeQuiz.questions.find(item => item.question_id === answer.question_id);
-          const id = answer.knowledge_point_id || question?.knowledge_point_id || `kp_${slug(question?.knowledge_point || 'unknown')}`;
-          const current = knowledgeState[id] || {
-            knowledge_point_id: id,
-            knowledge_point: answer.knowledge_point || question?.knowledge_point || '未标注知识点',
-            independent_correct: 0,
-            error_count: 0,
-            uncertain_count: 0,
-            guided_completed: 0,
-            still_unclear: 0,
-            repeated_error: 0,
-            error_codes: {}
-          };
-          if (answer.correct) current.independent_correct += 1;
-          else current.error_count += 1;
-          if (answer.fuzzy) current.uncertain_count += 1;
-          if (answer.guidance_status === 'guided_completed') current.guided_completed += 1;
-          if (answer.learning_state === 'still_unclear') current.still_unclear += 1;
-          if (answer.learning_state === 'repeated_error') current.repeated_error += 1;
-          if (answer.error_code) current.error_codes[answer.error_code] = (current.error_codes[answer.error_code] || 0) + 1;
-          current.latest_state = answer.learning_state;
-          current.updated_at = new Date().toISOString();
-          current.weakness_score = Math.max(0,
-            current.error_count * 2 + current.uncertain_count + current.still_unclear * 2 + current.repeated_error * 2 - current.independent_correct
-          );
-          knowledgeState[id] = current;
-        });
-        const weakKnowledgePoints = Object.values(knowledgeState)
-          .filter(item => item.weakness_score > 0 && item.latest_state !== 'independent_correct')
-          .sort((left, right) => right.weakness_score - left.weakness_score);
-        const missedKnowledgePoints = weakKnowledgePoints.map(item => item.knowledge_point);
-        const guidedCount = activeQuiz.answers.filter(answer => answer.guidance_status === 'guided_completed').length;
-        const repeatedCount = activeQuiz.answers.filter(answer => answer.learning_state === 'repeated_error').length;
+        const missedKnowledgePoints = [...new Set(activeQuiz.answers
+          .filter(answer => !answer.correct)
+          .map(answer => activeQuiz.questions.find(question => question.question_id === answer.question_id)?.knowledge_point)
+          .filter(Boolean))];
         const reportContext = {
           course: getCurrentCourse().course_name,
           chapter: getCurrentCourse().chapters[currentChapterIndex]?.title,
@@ -5774,12 +4873,9 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
               const q = activeQuiz.questions.find(qq => qq.question_id === a.question_id);
               return {
                 stem: q?.stem?.slice(0, 60) || '',
-                student_answer: a.student_answer,
+                student_answer: a.answer_text || a.answer,
                 correct_answer: q?.answer,
-                knowledge_point: q?.knowledge_point,
-                error_code: a.error_code,
-                guidance_status: a.guidance_status,
-                learning_state: a.learning_state
+                knowledge_point: q?.knowledge_point
               };
             })
         };
@@ -5788,8 +4884,6 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
           : `⭐ 本轮得分 ${score} 分，整体掌握不错！\n\n✅ 继续保持这个状态，按系统分配的难度继续练习。\n\n💡 可以适当挑战更高难度的题目。`;
         session.next_set_by_band[completedBand] = completedSet >= 3 ? 1 : completedSet + 1;
         session.difficulty_band = nextBand;
-        session.knowledge_state = knowledgeState;
-        session.weak_knowledge_points = weakKnowledgePoints;
         session.round_history.push({
           difficulty_band: completedBand,
           set_number: completedSet,
@@ -5808,15 +4902,12 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
           </div>
           <div class="bg-paper-white border-brutal shadow-brutal p-5">
             <h3 class="text-xl font-black mb-3">表现概览</h3>
-            <p class="font-bold">错题 ${wrong} 道 · 不确定 ${fuzzy} 道 · 完成引导 ${guidedCount} 道</p>
-            ${repeatedCount ? `<p class="mt-2 text-sm font-black text-red-700">重复错误 ${repeatedCount} 道，将优先安排相关知识点。</p>` : ''}
-            ${weakKnowledgePoints.length ? `<div class="mt-3 text-sm font-bold">薄弱知识点：${weakKnowledgePoints.slice(0, 5).map(item => `${escapeHtml(item.knowledge_point)}（${item.weakness_score}）`).join('、')}</div>` : '<div class="mt-3 text-sm font-bold">本轮没有新增薄弱知识点。</div>'}
+            <p class="font-bold">错题 ${wrong} 道 · 不确定 ${fuzzy} 道</p>
           </div>
           <div class="bg-lime border-brutal shadow-brutal p-5">
             <h3 class="text-xl font-black mb-2">下一轮</h3>
             <p class="font-black text-2xl">${bandLabel(nextBand)} · 第${nextSet}套</p>
             <p class="mt-2 text-sm font-bold">${score < 60 ? '低于60分，降低一个难度层。' : score < 80 ? '60-79分，保持当前难度层。' : '80分以上，提高一个难度层。'}</p>
-            <p class="mt-2 text-sm font-bold">下一套仍是固定审核题组，只调整出题顺序，薄弱知识点优先；是否掌握以之后独立答对为准。</p>
           </div>
           <div class="bg-cyan border-brutal shadow-brutal p-5 rotate-1">
             <h3 class="text-xl font-black mb-3">小站建议</h3>
@@ -6059,9 +5150,6 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
       document.getElementById('detail-close-btn').addEventListener('click', () => {
         document.getElementById('course-detail-modal').classList.add('hide');
       });
-      document.getElementById('backup-restore-close-btn').addEventListener('click', () => {
-        document.getElementById('backup-restore-modal').classList.add('hide');
-      });
 
       // 点击空白处关闭下拉菜单
       document.addEventListener('click', (e) => {
@@ -6071,12 +5159,10 @@ source_basis 是仅供审核人员查看的命题依据：填写主资料中的�
         }
       });
 
-      // 先从硬盘恢复，再允许首次空状态落盘；避免重新打开页面时覆盖已有题库。
-      restoreStateFromDisk().then(restored => {
-        if (!restored) saveState();
-        showScreen('home');
-      });
+      saveState();
+      showScreen('home');
     })();
   </script>
 </body>
 </html>
+

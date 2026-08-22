@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教育 App - 新粗野主义风格原型</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FFCC00',   /* 亮黄 */
+                        cyan: '#00FFFF',      /* 青色 */
+                        magenta: '#FF00FF',   /* 品红 */
+                        lime: '#CCFF00',      /* 亮绿 */
+                        orange: '#FF6600',    /* 亮橙 */
+                        /* 新增：优化后的淡色背景，增加灰色调 */
+                        'pastel-grey': '#EAEAEA',   /* 复古灰色白/米灰色 */
+                        'pastel-blue': '#E0F7FA',   /* 极淡的青蓝 */
+                        'pastel-yellow': '#FFFDE7', /* 极淡的鹅黄 */
+                        'paper-white': '#FCFAFA',   /* 带有质感的卡片白，避免纯白 */
+                    },
+                    boxShadow: {
+                        'brutal': '6px 6px 0px 0px rgba(0, 0, 0, 1)',
+                        'brutal-lg': '10px 10px 0px 0px rgba(0, 0, 0, 1)',
+                        'brutal-sm': '4px 4px 0px 0px rgba(0, 0, 0, 1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 优化后的网格纸背景：使用灰色白底和更浅灰的线条 + 淡黄色星星/色块 */
+        .bg-graph-paper {
+            background-color: #EAEAEA;
+            background-image: 
+                /* 网格 */
+                linear-gradient(#dbdbdb 1px, transparent 1px),
+                linear-gradient(90deg, #dbdbdb 1px, transparent 1px),
+                /* 右上大号淡黄色五角星感的光晕 */
+                radial-gradient(circle at 92% 8%, rgba(255, 230, 128, 0.35) 0, transparent 55%),
+                /* 左下小一点的淡黄色星星 */
+                radial-gradient(circle at 6% 92%, rgba(255, 230, 128, 0.25) 0, transparent 55%),
+                /* 零星的活泼色块（粉色/青色） */
+                radial-gradient(circle at 15% 25%, rgba(255, 0, 255, 0.12) 0, transparent 60%),
+                radial-gradient(circle at 80% 75%, rgba(0, 255, 255, 0.12) 0, transparent 60%);
+            background-size: 
+                20px 20px,
+                20px 20px,
+                auto,
+                auto,
+                auto,
+                auto;
+            background-repeat: no-repeat;
+        }
+        
+        /* 针对不同页面可以有不同色调的网格底，同样叠加淡黄色星星 */
+        .bg-graph-blue {
+            background-color: #E0F7FA;
+            background-image: 
+                /* 网格 */
+                linear-gradient(#b2ebf2 1px, transparent 1px),
+                linear-gradient(90deg, #b2ebf2 1px, transparent 1px),
+                /* 右上星星 */
+                radial-gradient(circle at 90% 10%, rgba(255, 255, 204, 0.35) 0, transparent 55%),
+                /* 左下星星 */
+                radial-gradient(circle at 8% 88%, rgba(255, 255, 204, 0.25) 0, transparent 55%),
+                /* 额外色块 */
+                radial-gradient(circle at 20% 30%, rgba(255, 0, 255, 0.10) 0, transparent 60%),
+                radial-gradient(circle at 78% 70%, rgba(0, 255, 255, 0.10) 0, transparent 60%);
+            background-size: 
+                20px 20px,
+                20px 20px,
+                auto,
+                auto,
+                auto,
+                auto;
+            background-repeat: no-repeat;
+        }
+
+        .border-brutal { border: 3px solid #000; }
+
+        /* 统一交互动效：按钮和卡片轻微弹跳 / 翻转 */
+        .btn-brutal,
+        .card-hover {
+            transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, background-color 0.15s ease-out, filter 0.15s ease-out;
+            will-change: transform, box-shadow;
+        }
+        .btn-brutal:hover {
+            transform: translate(-2px, -2px) rotate(-1deg);
+            box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
+            filter: brightness(1.03);
+        }
+        .card-hover:hover {
+            transform: translate(-4px, -4px) rotate(-1.5deg);
+            box-shadow: 12px 12px 0px 0px rgba(0,0,0,1);
+        }
+
+        .btn-brutal { transition: all 0.1s ease-in-out; }
+        .btn-brutal:active {
+            transform: translate(4px, 4px) !important;
+            box-shadow: 2px 2px 0px 0px rgba(0,0,0,1) !important;
+        }
+        .cost-box {
+            background: #f0f9eb;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #67c23a;
+            margin: 30px 0;
+        }
+        .iphone-frame {
+            width: 393px;
+            height: 852px;
+            border: 14px solid #1a1a1a;
+            border-radius: 55px;
+            position: relative;
+            overflow: hidden;
+            /* 改成略带灰度的白色，并叠加格子+活泼色块底纹 */
+            background-color: rgba(245, 245, 245, 0.95);
+            background-image:
+                linear-gradient(rgba(220, 220, 220, 0.7) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(220, 220, 220, 0.7) 1px, transparent 1px),
+                radial-gradient(circle at 10% 20%, rgba(255, 204, 0, 0.16) 0, transparent 55%),
+                radial-gradient(circle at 80% 10%, rgba(0, 255, 255, 0.14) 0, transparent 55%),
+                radial-gradient(circle at 20% 85%, rgba(255, 0, 255, 0.14) 0, transparent 55%);
+            background-size: 20px 20px, 20px 20px, auto, auto, auto;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+            transform: scale(0.75);
+            transform-origin: top center;
+            margin-bottom: -200px; 
+        }
+        
+        .dynamic-island {
+            width: 120px; height: 35px; background-color: #000;
+            border-radius: 20px; position: absolute; top: 10px;
+            left: 50%; transform: translateX(-50%); z-index: 50;
+        }
+
+        .home-indicator {
+            width: 130px; height: 5px; background-color: #000;
+            border-radius: 10px; position: absolute; bottom: 8px;
+            left: 50%; transform: translateX(-50%); z-index: 50;
+        }
+
+        .iphone-content {
+            width: 100%; height: 100%; overflow-y: auto;
+            scrollbar-width: none; position: relative;
+        }
+        .iphone-content::-webkit-scrollbar { display: none; }
+
+        .status-bar {
+            height: 54px; width: 100%; position: absolute; top: 0;
+            z-index: 40; display: flex; justify-content: space-between;
+            padding: 15px 25px 0 25px; font-size: 14px; font-weight: 800; color: #000;
+        }
+    </style>
+</head>
+<body class="bg-gray-300 min-h-screen p-8 font-sans">
+
+    <header class="text-center mb-12">
+        <h1 class="text-5xl font-black text-black mb-4 uppercase tracking-tighter" style="text-shadow: 4px 4px 0px #FFCC00;">信科-刷题小站 UI</h1>
+        <p class="text-black font-bold border-2 border-black inline-block px-4 py-1 bg-paper-white shadow-brutal-sm transform rotate-1">个性化 & 快速落地 & 低成本 & 长期使用</p>
+        <!-- <p class="text-black font-bold border-2 border-black inline-block px-4 py-1 bg-paper-white shadow-brutal-sm transform rotate-1">灰色背景 & 表情包底纹优化版</p> -->
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-16 justify-items-center">
+
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">01 首页</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="status-bar"><span>9:41</span><span><i class="fa-solid fa-signal mr-1"></i><i class="fa-solid fa-wifi mr-1"></i><i class="fa-solid fa-battery-full"></i></span></div>
+                <div class="home-indicator"></div>
+                
+                <div class="iphone-content bg-graph-paper flex flex-col justify-center items-center px-6 gap-8">
+                    <div class="bg-primary w-full border-brutal shadow-brutal p-8 flex flex-col items-center transform -rotate-2 btn-brutal card-hover cursor-pointer hover:bg-yellow-400 z-10">
+                        <i class="fa-solid fa-folder-plus text-6xl text-black mb-4"></i>
+                        <h3 class="text-3xl font-black text-black uppercase tracking-widest">上传资料</h3>
+                    </div>
+                    <div class="bg-cyan w-full border-brutal shadow-brutal p-8 flex flex-col items-center transform rotate-3 btn-brutal cursor-pointer hover:bg-cyan-400">
+                        <i class="fa-solid fa-link text-6xl text-black mb-4"></i>
+                        <h3 class="text-3xl font-black text-black uppercase tracking-widest">加入课程</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">02 资料解析加载页</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="status-bar"><span>9:41</span><span><i class="fa-solid fa-signal mr-1"></i><i class="fa-solid fa-wifi mr-1"></i><i class="fa-solid fa-battery-full"></i></span></div>
+                <div class="home-indicator"></div>
+                
+                <div class="iphone-content bg-pastel-grey bg-graph-paper flex justify-center items-center relative border-brutal border-t-0 overflow-hidden">
+
+                    <!-- 表情包条，压在卡片上方，不遮挡点击 -->
+                    <div class="absolute top-20 left-1/2 -translate-x-1/2 z-20 text-4xl text-yellow-300 opacity-70 flex gap-3 font-black pointer-events-none">
+                        🧠 💡 🤔  
+                    </div>
+
+                    <div class="relative z-10 bg-paper-white w-4/5 border-brutal shadow-brutal-lg p-8 flex flex-col items-center transform rotate-2 card-hover">
+                        <i class="fa-solid fa-file-code text-6xl text-black mb-6 animate-pulse"></i>
+                        <h2 class="text-2xl font-black text-black tracking-wide mb-4">资料解析中...</h2>
+                        <div class="w-full h-6 border-brutal bg-pastel-grey relative overflow-hidden">
+                            <div class="absolute top-0 left-0 h-full bg-lime border-r-2 border-black w-3/4 animate-pulse"></div>
+                        </div>
+                        <p class="text-xs font-bold text-gray-500 mt-2 uppercase">Parsing Data</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">03 章节选择</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="home-indicator"></div>
+                <div class="iphone-content bg-pastel-yellow pt-24 px-6 border-brutal">
+                    <h1 class="text-4xl font-black mb-8 text-black uppercase border-b-4 border-black pb-2">课程大纲</h1>
+                    <div class="relative flex flex-col gap-4">
+                        <div class="bg-lime border-brutal shadow-brutal p-6 relative z-20 transform -rotate-1 card-hover">
+                            <div class="bg-black text-white text-xs font-bold inline-block px-2 py-1 mb-2">CURRENT</div>
+                            <h3 class="text-2xl font-black text-black mb-4">第一章：引言</h3>
+                            <button class="w-full bg-paper-white border-brutal shadow-brutal-sm text-black font-black py-2 btn-brutal uppercase tracking-wider">Start <i class="fa-solid fa-arrow-right ml-2"></i></button>
+                        </div>
+                        <div class="bg-paper-white border-brutal shadow-brutal-sm p-6 relative z-10 transform rotate-1 card-hover">
+                            <h3 class="text-xl font-black text-black">第二章：关系数据库</h3>
+                        </div>
+                        <div class="bg-pastel-grey border-brutal p-6 relative z-0 card-hover">
+                            <h3 class="text-xl font-bold text-gray-500">第三章：SQL语言</h3>
+                        </div>
+                        <div class="bg-pastel-grey border-brutal p-6 relative z-0 card-hover">
+                            <h3 class="text-xl font-bold text-gray-500">第四章：数据库安全性</h3>
+                        </div>
+                        <div class="bg-pastel-grey border-brutal p-6 relative z-0 card-hover">
+                            <h3 class="text-xl font-bold text-gray-500">第五章：数据库完整性</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">04 诊断前导</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="home-indicator"></div>
+                <div class="iphone-content bg-graph-blue flex flex-col justify-center items-center px-6 relative">
+                    <div class="bg-primary w-full border-brutal shadow-brutal-lg p-10 flex flex-col items-center z-10 transform rotate-1 card-hover">
+                        <i class="fa-solid fa-brain text-7xl text-black mb-6"></i>
+                        <h2 class="text-4xl font-black text-black text-center leading-none">10题前置诊断</h2>
+                        <div class="h-1 w-full bg-black my-4"></div>
+                        <p class="text-black font-bold text-center uppercase">System Check</p>
+                    </div>
+                    <button class="absolute bottom-20 w-3/4 bg-magenta text-white font-black text-2xl py-4 border-brutal shadow-brutal btn-brutal z-20 transform -rotate-2">
+                        开始检测
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- AI引导式学习 -->
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">05 前置诊断-10题选择</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="home-indicator"></div>
+                <div class="iphone-content bg-graph-paper flex justify-center items-center px-4 relative overflow-hidden">
+                    <div class="absolute w-11/12 h-[65%] bg-pastel-grey border-brutal top-[19%] z-10 transform rotate-3 opacity-80"></div>
+                    <!-- 可拖拽滑动的问答卡片 -->
+                    <div id="core-card" class="w-full bg-paper-white border-brutal shadow-brutal-lg p-6 z-20 flex flex-col h-[65%] transform -rotate-1 card-hover cursor-grab active:cursor-grabbing">
+                        <div id="core-progress" class="bg-black text-white px-3 py-1 font-black text-sm w-max mb-6 border-brutal">Q 1 / 7</div>
+                        <h3 id="core-question" class="text-2xl font-black text-black mb-6 leading-snug">
+                            在关系代数中，用于从关系中选出满足给定条件的元组的操作是？
+                        </h3>
+                        <div class="space-y-4 flex-grow">
+                            <div id="core-option-a" class="w-full p-4 border-brutal shadow-brutal-sm bg-primary font-black text-black cursor-pointer btn-brutal">
+                                A. 选择 (Selection)
+                            </div>
+                            <div id="core-option-b" class="w-full p-4 border-brutal bg-paper-white font-bold text-black cursor-pointer hover:bg-pastel-yellow">
+                                B. 投影 (Projection)
+                            </div>
+                            <div id="core-option-c" class="w-full p-4 border-brutal bg-paper-white font-bold text-black cursor-pointer hover:bg-pastel-yellow">
+                                C. 连接 (Join)
+                            </div>
+                            <div id="core-option-c" class="w-full p-4 border-brutal bg-paper-white font-bold text-black cursor-pointer hover:bg-pastel-yellow">
+                                D. 模糊
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">06 前置检测题判分+AI标签生成</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="home-indicator"></div>
+                <div class="iphone-content bg-pastel-yellow pt-16 px-6 border-brutal border-t-0">
+                    <h1 class="text-4xl font-black mb-6 text-black uppercase">55分</h1>
+                    <div class="bg-paper-white border-brutal shadow-brutal p-6 w-full mt-4 card-hover">
+                        <h2 class="text-xl font-black text-black mb-6 bg-primary inline-block px-2 py-1 border-brutal"><i class="fa-solid fa-fire text-black mr-2"></i>薄弱点分析</h2>
+                        <div class="flex flex-wrap gap-4">
+                            <span class="bg-magenta border-brutal shadow-brutal-sm px-4 py-2 text-white font-black text-sm transform -rotate-2 cursor-pointer btn-brutal">参照完整性概念模糊</span>
+                            <span class="bg-primary border-brutal shadow-brutal-sm px-4 py-2 text-black font-black text-sm transform rotate-1 cursor-pointer btn-brutal">连接查询一知半解</span>
+                            <span class="bg-pastel-grey border-brutal px-4 py-2 text-black font-bold text-sm cursor-pointer hover:bg-gray-200">关系代数投影概念模糊</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">07 章节训练</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="home-indicator"></div>
+                <div class="iphone-content bg-graph-blue flex flex-col justify-center items-center px-6 relative">
+                    <div class="bg-primary w-full border-brutal shadow-brutal-lg p-10 flex flex-col items-center z-10 transform rotate-1 card-hover">
+                        <i class="fa-solid fa-brain text-7xl text-black mb-6"></i>
+                        <h2 class="text-4xl font-black text-black text-center leading-none">10题章节训练</h2>
+                        <div class="h-1 w-full bg-black my-4"></div>
+                        <p class="text-black font-bold text-center uppercase">System Check</p>
+                    </div>
+                    <button class="absolute bottom-20 w-3/4 bg-magenta text-white font-black text-2xl py-4 border-brutal shadow-brutal btn-brutal z-20 transform -rotate-2">
+                        开始检测
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">08 章节训练-5题选择</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="home-indicator"></div>
+                <div class="iphone-content bg-graph-paper flex justify-center items-center px-4 relative overflow-hidden">
+                    <div class="absolute w-11/12 h-[65%] bg-pastel-grey border-brutal top-[19%] z-10 transform rotate-3 opacity-80"></div>
+                    <!-- 可拖拽滑动的问答卡片 -->
+                    <div id="core-card" class="w-full bg-paper-white border-brutal shadow-brutal-lg p-6 z-20 flex flex-col h-[65%] transform -rotate-1 card-hover cursor-grab active:cursor-grabbing">
+                        <div id="core-progress" class="bg-black text-white px-3 py-1 font-black text-sm w-max mb-6 border-brutal">Q 1 / 5</div>
+                        <h3 id="core-question" class="text-2xl font-black text-black mb-6 leading-snug">
+                            在关系代数中，用于从关系中选出满足给定条件的元组的操作是？
+                        </h3>
+                        <div class="space-y-4 flex-grow">
+                            <div id="core-option-a" class="w-full p-4 border-brutal shadow-brutal-sm bg-primary font-black text-black cursor-pointer btn-brutal">
+                                A. 选择 (Selection)
+                            </div>
+                            <div id="core-option-b" class="w-full p-4 border-brutal bg-paper-white font-bold text-black cursor-pointer hover:bg-pastel-yellow">
+                                B. 投影 (Projection)
+                            </div>
+                            <div id="core-option-c" class="w-full p-4 border-brutal bg-paper-white font-bold text-black cursor-pointer hover:bg-pastel-yellow">
+                                C. 连接 (Join)
+                            </div>
+                            <div id="core-option-c" class="w-full p-4 border-brutal bg-paper-white font-bold text-black cursor-pointer hover:bg-pastel-yellow">
+                                D. 模糊
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">08 章节训练-2题简答</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="home-indicator"></div>
+                <div class="iphone-content bg-graph-blue flex justify-center items-center px-4 relative">
+                    <div class="w-full bg-paper-white border-brutal shadow-brutal p-6 z-20 flex flex-col h-[65%] card-hover">
+                        <span class="bg-cyan border-brutal text-black text-xs px-2 py-1 w-max mb-4 font-black uppercase">CODE / TEXT</span>
+                        <h3 class="text-xl font-black text-black mb-4">请简述什么是“实体完整性约束”？</h3>
+                        <textarea class="w-full flex-grow bg-pastel-grey border-brutal p-4 focus:outline-none focus:bg-white resize-none mb-4 font-mono font-bold" placeholder="> TYPE HERE..."></textarea>
+                        <button class="w-full bg-primary text-black font-black text-xl py-3 border-brutal shadow-brutal btn-brutal mt-auto">提交 SUBMIT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">08 章节训练-3题代码填空</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="home-indicator"></div>
+                <div class="iphone-content bg-graph-blue flex justify-center items-center px-4 relative">
+                    <div class="w-full bg-paper-white border-brutal shadow-brutal p-6 z-20 flex flex-col h-[65%] card-hover">
+                        <!-- <span class="bg-cyan border-brutal text-black text-xs px-2 py-1 w-max mb-4 font-black uppercase">CODE / TEXT</span>
+                        <h3 class="text-xl font-black text-black mb-4">请简述什么是“实体完整性约束”？</h3>
+                        <textarea class="w-full flex-grow bg-pastel-grey border-brutal p-4 focus:outline-none focus:bg-white resize-none mb-4 font-mono font-bold" placeholder="> TYPE HERE..."></textarea> -->
+                        <h3 style="font-size: 1.4rem; line-height: 1.6;">
+                            <strong>
+                                题目：
+                                请补全SQL语句，查询所有成绩大于60分的学生姓名：
+        
+                                SELECT name
+                                FROM student
+                                WHERE score > ___;
+                            </strong>
+
+                        </h3>
+
+                        <button style="margin-top: 10rem;" class="w-full bg-primary text-black font-black text-xl py-3 border-brutal shadow-brutal btn-brutal">提交 SUBMIT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- AI引导式学习 -->
+
+
+
+
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">09 反馈：正确</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="home-indicator"></div>
+                <div class="iphone-content bg-graph-paper flex justify-center items-center px-4 relative overflow-hidden">
+                    <div class="w-full bg-paper-white border-brutal p-6 z-10 flex flex-col h-[65%] scale-95 opacity-50 grayscale card-hover">
+                        <h3 class="text-lg font-bold text-black mb-4">关系代数...</h3>
+                    </div>
+                    <div class="absolute w-4/5 bg-lime border-brutal shadow-brutal-lg p-8 z-30 flex flex-col items-center transform rotate-2 card-hover">
+                        <i class="fa-solid fa-check text-6xl text-black mb-2" style="-webkit-text-stroke: 2px black;"></i>
+                        <h2 class="text-3xl font-black text-black mt-2">回答正确！</h2>
+                        <div class="mt-4 bg-paper-white border-brutal px-4 py-1 font-black">+10 EXP</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">10 模糊或错误：AI引导式学习</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="home-indicator"></div>
+                <div class="iphone-content bg-graph-paper flex justify-center items-center px-4 relative">
+                    <div class="w-full bg-paper-white border-brutal p-6 z-10 flex flex-col h-[65%] scale-95 opacity-80grayscale card-hover">
+                        <h3 class="text-lg font-bold text-black mb-4">
+                                小站：
+                                我注意到你提到了“外键”，说明你对完整性有一定理解 👍
+                                不过我们现在的问题是：实体完整性。
+                                你能回忆一下，实体完整性主要约束的是哪一类属性吗？
+                                <br>
+                                <br>
+                                我：
+                                是不是主键？
+                                <br>
+                                <br>
+                                小站：
+                                很好，你已经抓住关键了 ✅
+                                那我再问你一步：
+                                👉 如果主键允许为空，会出现什么问题？
+                                <br>
+                                <br>
+                                我：.................
+                        </h3>
+                    </div>
+                    <div class="absolute bottom-12 w-11/12 bg-orange border-brutal shadow-brutal p-6 z-30 transform -rotate-1 card-hover">
+                        <div class="flex items-center gap-3 mb-4 bg-paper-white border-brutal w-max px-2 py-1">
+                            <i class="fa-solid fa-robot text-black"></i>
+                            <span class="font-black text-black text-sm uppercase">AI GUIDANCE</span>
+                        </div>
+                        <h3 class="text-2xl font-black text-black mb-2">思路偏了哦...</h3>
+                        <p class="text-black font-bold text-sm leading-relaxed border-l-4 border-black pl-3 bg-paper-white/40">你提到了外键，但这其实属于“参照完整性”。再想想，关于主键的规则是什么？</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">11 报告薄弱点</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="home-indicator"></div>
+                <div class="iphone-content bg-pastel-yellow pt-16 px-6 border-brutal border-t-0">
+                    <h1 class="text-4xl font-black mb-6 text-black uppercase">分数+最终报告</h1>
+                    <div class="bg-paper-white border-brutal shadow-brutal p-6 w-full mt-4 card-hover">
+                        <h2 class="text-xl font-black text-black mb-6 bg-primary inline-block px-2 py-1 border-brutal"><i class="fa-solid fa-fire text-black mr-2"></i>薄弱点分析</h2>
+                        <div class="flex flex-wrap gap-4">
+                            <span class="bg-magenta border-brutal shadow-brutal-sm px-4 py-2 text-white font-black text-sm transform -rotate-2 cursor-pointer btn-brutal">参照完整性</span>
+                            <span class="bg-primary border-brutal shadow-brutal-sm px-4 py-2 text-black font-black text-sm transform rotate-1 cursor-pointer btn-brutal">连接查询</span>
+                            <span class="bg-pastel-grey border-brutal px-4 py-2 text-black font-bold text-sm cursor-pointer hover:bg-gray-200">关系代数投影</span>
+                        </div>
+                    </div>
+                    <div class="bg-paper-white border-brutal shadow-brutal p-6 w-full mt-4 card-hover">
+                        <h2 class="text-xl font-black text-black mb-6 bg-primary inline-block px-2 py-1 border-brutal"><i class="fa-solid fa-fire text-black mr-2"></i>学生能力深度解析</h2>
+                        <div class="flex flex-wrap gap-4">
+                            <!-- <span class="bg-magenta border-brutal shadow-brutal-sm px-4 py-2 text-white font-black text-sm transform -rotate-2 cursor-pointer btn-brutal">参照完整性</span>
+                            <span class="bg-primary border-brutal shadow-brutal-sm px-4 py-2 text-black font-black text-sm transform rotate-1 cursor-pointer btn-brutal">连接查询</span>
+                            <span class="bg-pastel-grey border-brutal px-4 py-2 text-black font-bold text-sm cursor-pointer hover:bg-gray-200">关系代数投影</span> -->
+                        </div>
+                    </div>
+                    <div class="bg-paper-white border-brutal shadow-brutal p-6 w-full mt-4 card-hover">
+                        <h2 class="text-xl font-black text-black mb-6 bg-primary inline-block px-2 py-1 border-brutal"><i class="fa-solid fa-fire text-black mr-2"></i>鼓励性话语</h2>
+                        <div class="flex flex-wrap gap-4">
+                            <!-- <span class="bg-magenta border-brutal shadow-brutal-sm px-4 py-2 text-white font-black text-sm transform -rotate-2 cursor-pointer btn-brutal">参照完整性</span>
+                            <span class="bg-primary border-brutal shadow-brutal-sm px-4 py-2 text-black font-black text-sm transform rotate-1 cursor-pointer btn-brutal">连接查询</span>
+                            <span class="bg-pastel-grey border-brutal px-4 py-2 text-black font-bold text-sm cursor-pointer hover:bg-gray-200">关系代数投影</span> -->
+                            你超级棒。。。。。。。。。。。。。。。。
+                        </div>
+                    </div>
+                    <button class="absolute bottom-20 w-3/4 bg-magenta text-white font-black text-2xl py-4 border-brutal shadow-brutal btn-brutal z-20 transform -rotate-2">
+                        再次挑战    
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cost-box">
+            <h2><strong>💰低成本个性化学习系统（AI only where necessary）</strong></h2>
+            <ul style="margin-left: 20px; list-style: disc;">
+                <li><strong>设计原则：</strong>最小化AI调用，仅用于高价值决策环节 <strong>(从依赖调用API➡减少调用API)</strong></li>
+                <li><strong>AI作用：</strong>资料分析+生成题目+题目难度分数，能力建模、错因分析、学习引导</li>
+                <li><strong>核心优势：</strong>避免“全流程依赖AI”的高成本与不稳定问题
+                    <br>
+                    ❌ 传统方案：持续调用API
+                    <br>
+                    ✅ 本方案：一次生成 + 无限复用
+                </li>
+                <li><strong>更工程化：</strong>从简答API调用升级为面向教学的工程设计使其跨课程适配（一次设计Prompt → 多课程复用 → 自动生成题库）</li>
+                
+                <li><strong>我们不是依赖AI做教学，而是在使用AI的同时，把AI从“核心”变成“辅助”。</strong></li>
+            </ul>
+        </div>
+        
+ 
+        <!-- 成本核算 -->
+        <div class="cost-box">
+            <h2><strong>💰 核心成本核算（以《数据库》单本书+100名学生为例）</strong></h2>
+            <ul style="margin-left: 20px; list-style: disc;">
+                <li>固定成本（一次性生成题库）：≈1.4元 <strong>（永久有效，无限次使用）</strong></li>
+                <li>能力建模：100名学生≈0.06元</li>
+                <li>AI引导式学习：100名学生≈1元</li>
+                <li>学习报告：100名学生≈0.1元</li>
+                <li><strong>总成本：≈2.56元</strong></li>
+            </ul>
+        </div>
+        <div class="cost-box">
+            <h1>💰 <strong>流程图</strong></h1>
+            <div style="display: flex; justify-content: center;">
+                <img
+                    src="file:///C:/Users/Lenovo/.cursor/projects/d-cursor-workplace2/assets/c__Users_Lenovo_AppData_Roaming_Cursor_User_workspaceStorage_d967c7fd0cde06e86845f2b39c6d336e_images_______ER___2_-44cb305d-3af7-43e4-9adc-d0e1fa6b966c.png"
+                    alt="低成本个性化学习系统流程图"
+                    style="max-width: 100%; height: auto; border: 3px solid #000; box-shadow: 6px 6px 0 #000;"
+                />
+            </div>
+        </div>
+                <div class="cost-box">
+                    <h1>💰 <strong>文字版流程概括</strong></h1>
+                    <br>
+                    <ul style="margin-left: 20px; list-style: disc;">
+                        <li><strong>假设已经上传过此课程资料</strong></li>
+                        <li><strong>1️⃣ 章节选择</strong></li>
+                        <li><strong>2️⃣ 系统题目抽取+学生作答</strong></li>
+                        <li><strong>3️⃣ 打分+AI能力建模（5个标签+一句总结）</strong></li>
+                        <li><strong>4️⃣ 系统题目抽取+学生作答</strong></li>
+                        <li><strong>5️⃣ AI引导式学习（错误原因分析，引导式提问，类似题对比，再试一次）</strong></li>
+                        <li><strong>6️⃣ 二轮训练（ 系统题目抽取+学生作答）</strong></li>
+                        <li><strong>7️⃣ AI引导式学习支架  （错误原因分析，引导式提问，类似题对比，再试一次） </strong></li>
+                        <li><strong>8️⃣ 学习报告 </strong></li>
+                    </ul>
+                </div>
+                        <!-- 成本核算 -->
+
+    </div>
+
+    <script>
+        // 简单的拖拽滑动交互：核心问答卡片左右滑动切题
+        (function () {
+            const card = document.getElementById('core-card');
+            if (!card) return;
+
+            const progressEl = document.getElementById('core-progress');
+            const questionEl = document.getElementById('core-question');
+            const optionAEl = document.getElementById('core-option-a');
+            const optionBEl = document.getElementById('core-option-b');
+            const optionCEl = document.getElementById('core-option-c');
+
+            const questions = [
+                {
+                    title: '在关系代数中，用于从关系中选出满足给定条件的元组的操作是？',
+                    a: 'A. 选择 (Selection)',
+                    b: 'B. 投影 (Projection)',
+                    c: 'C. 连接 (Join)',
+                    d: 'D. 模糊'
+                },
+                {
+                    title: '用于从关系中选择部分属性的操作是？',
+                    a: 'A. 投影 (Projection)',
+                    b: 'B. 选择 (Selection)',
+                    c: 'C. 连接 (Join)',
+                    d: 'D. 模糊'
+
+                },
+                {
+                    title: '将两个关系按照某个公共属性进行组合的是哪种操作？',
+                    a: 'A. 连接 (Join)',
+                    b: 'B. 并 (Union)',
+                    c: 'C. 差 (Difference)'
+                }
+            ];
+
+            let index = 0;
+
+            function clearSelectionStyles() {
+                optionAEl.classList.remove('bg-primary');
+                optionAEl.classList.add('bg-paper-white');
+                optionBEl.classList.remove('bg-primary');
+                optionBEl.classList.add('bg-paper-white');
+                optionCEl.classList.remove('bg-primary');
+                optionCEl.classList.add('bg-paper-white');
+            }
+
+            function selectOption(el) {
+                clearSelectionStyles();
+                el.classList.remove('bg-paper-white');
+                el.classList.add('bg-primary');
+            }
+
+            function renderQuestion() {
+                const q = questions[index];
+                if (!q) return;
+                progressEl.textContent = `Q ${index + 1} / ${questions.length}`;
+                questionEl.textContent = q.title;
+                optionAEl.textContent = q.a;
+                optionBEl.textContent = q.b;
+                optionCEl.textContent = q.c;
+
+                // 默认选中状态：第 1 题选 A，第 2 题选 C，第 3 题选 B
+                if (index === 0) {
+                    selectOption(optionAEl);
+                } else if (index === 1) {
+                    selectOption(optionCEl);
+                } else if (index === 2) {
+                    selectOption(optionBEl);
+                } else {
+                    clearSelectionStyles();
+                }
+            }
+
+            renderQuestion();
+
+            let isDown = false;
+            let startX = 0;
+            let currentX = 0;
+            const threshold = 80; // 触发切换的最小滑动距离
+
+            function onDown(e) {
+                isDown = true;
+                startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
+                currentX = startX;
+                card.style.transition = 'none';
+            }
+
+            function onMove(e) {
+                if (!isDown) return;
+                const x = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
+                currentX = x;
+                const delta = x - startX;
+                // 限制最大偏移，稍微旋转一点
+                const limited = Math.max(Math.min(delta, 140), -140);
+                const rotation = limited / 40; // 小角度旋转
+                card.style.transform = `translateX(${limited}px) rotate(${rotation - 1}deg)`;
+            }
+
+            function onUp() {
+                if (!isDown) return;
+                isDown = false;
+                const delta = currentX - startX;
+
+                // 判断是否达到切换阈值以及方向
+                let direction = 0; // -1 表示向左切到下一题，1 表示向右切到上一题
+                if (delta > threshold && index > 0) {
+                    direction = 1;
+                } else if (delta < -threshold && index < questions.length - 1) {
+                    direction = -1;
+                }
+
+                // 没达到阈值：只做回弹
+                if (direction === 0) {
+                    card.style.transition = 'transform 0.18s ease-out';
+                    card.style.transform = 'translateX(0px) rotate(-1deg)';
+                    return;
+                }
+
+                // 先把当前卡片推出屏幕，再把新题目从另一侧推入
+                const leaveX = direction * 420; // 离场位置
+                const enterX = -direction * 420; // 入场起点
+
+                // 第一步：当前题目滑出屏幕
+                card.style.transition = 'transform 0.18s ease-in';
+                card.style.transform = `translateX(${leaveX}px) rotate(${direction * 6}deg)`;
+
+                setTimeout(() => {
+                    // 更新题目索引
+                    index = index + (direction === 1 ? -1 : 1);
+                    renderQuestion();
+
+                    // 把卡片瞬间移到另一侧准备入场
+                    card.style.transition = 'none';
+                    card.style.transform = `translateX(${enterX}px) rotate(${direction * -4}deg)`;
+
+                    // 下一帧开始入场动画
+                    requestAnimationFrame(() => {
+                        card.style.transition = 'transform 0.22s cubic-bezier(0.16, 1, 0.3, 1)';
+                        card.style.transform = 'translateX(0px) rotate(-1deg)';
+                    });
+                }, 190);
+            }
+
+            card.addEventListener('mousedown', onDown);
+            window.addEventListener('mousemove', onMove);
+            window.addEventListener('mouseup', onUp);
+
+            card.addEventListener('touchstart', onDown, { passive: true });
+            window.addEventListener('touchmove', onMove, { passive: true });
+            window.addEventListener('touchend', onUp);
+        })();
+    </script>
+</body>
+</html>

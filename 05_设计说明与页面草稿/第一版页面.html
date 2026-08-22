@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教育 App - 新粗野主义风格原型</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FFCC00',   /* 亮黄 */
+                        cyan: '#00FFFF',      /* 青色 */
+                        magenta: '#FF00FF',   /* 品红 */
+                        lime: '#CCFF00',      /* 亮绿 */
+                        orange: '#FF6600',    /* 亮橙 */
+                        /* 新增：优化后的淡色背景，增加灰色调 */
+                        'pastel-grey': '#EAEAEA',   /* 复古灰色白/米灰色 */
+                        'pastel-blue': '#E0F7FA',   /* 极淡的青蓝 */
+                        'pastel-yellow': '#FFFDE7', /* 极淡的鹅黄 */
+                        'paper-white': '#FCFAFA',   /* 带有质感的卡片白，避免纯白 */
+                    },
+                    boxShadow: {
+                        'brutal': '6px 6px 0px 0px rgba(0, 0, 0, 1)',
+                        'brutal-lg': '10px 10px 0px 0px rgba(0, 0, 0, 1)',
+                        'brutal-sm': '4px 4px 0px 0px rgba(0, 0, 0, 1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 优化后的网格纸背景：使用灰色白底和更浅灰的线条 */
+        .bg-graph-paper {
+            background-color: #EAEAEA;
+            background-image: 
+                linear-gradient(#dbdbdb 1px, transparent 1px),
+                linear-gradient(90deg, #dbdbdb 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        /* 针对不同页面可以有不同色调的网格底 */
+        .bg-graph-blue {
+            background-color: #E0F7FA;
+            background-image: 
+                linear-gradient(#b2ebf2 1px, transparent 1px),
+                linear-gradient(90deg, #b2ebf2 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .border-brutal { border: 3px solid #000; }
+
+        .btn-brutal { transition: all 0.1s ease-in-out; }
+        .btn-brutal:active {
+            transform: translate(4px, 4px) !important;
+            box-shadow: 2px 2px 0px 0px rgba(0,0,0,1) !important;
+        }
+
+        .iphone-frame {
+            width: 393px;
+            height: 852px;
+            border: 14px solid #1a1a1a;
+            border-radius: 55px;
+            position: relative;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+            transform: scale(0.75);
+            transform-origin: top center;
+            margin-bottom: -200px; 
+        }
+        
+        .dynamic-island {
+            width: 120px; height: 35px; background-color: #000;
+            border-radius: 20px; position: absolute; top: 10px;
+            left: 50%; transform: translateX(-50%); z-index: 50;
+        }
+
+        .home-indicator {
+            width: 130px; height: 5px; background-color: #000;
+            border-radius: 10px; position: absolute; bottom: 8px;
+            left: 50%; transform: translateX(-50%); z-index: 50;
+        }
+
+        .iphone-content {
+            width: 100%; height: 100%; overflow-y: auto;
+            scrollbar-width: none; position: relative;
+        }
+        .iphone-content::-webkit-scrollbar { display: none; }
+
+        .status-bar {
+            height: 54px; width: 100%; position: absolute; top: 0;
+            z-index: 40; display: flex; justify-content: space-between;
+            padding: 15px 25px 0 25px; font-size: 14px; font-weight: 800; color: #000;
+        }
+    </style>
+</head>
+<body class="bg-gray-300 min-h-screen p-8 font-sans">
+
+    <header class="text-center mb-12">
+        <h1 class="text-5xl font-black text-black mb-4 uppercase tracking-tighter" style="text-shadow: 4px 4px 0px #FFCC00;">NEO-BRUTALISM UI</h1>
+        <p class="text-black font-bold border-2 border-black inline-block px-4 py-1 bg-paper-white shadow-brutal-sm transform rotate-1">极高兴趣 & 极低成本 & 极佳极佳</p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-16 justify-items-center">
+
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">01 首页</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="status-bar"><span>9:41</span><span><i class="fa-solid fa-signal mr-1"></i><i class="fa-solid fa-wifi mr-1"></i><i class="fa-solid fa-battery-full"></i></span></div>
+                <div class="home-indicator"></div>
+                
+                <div class="iphone-content bg-graph-paper flex flex-col justify-center items-center px-6 gap-8">
+                    <div class="bg-primary w-full border-brutal shadow-brutal p-8 flex flex-col items-center transform -rotate-2 btn-brutal cursor-pointer hover:bg-yellow-400 z-10">
+                        <i class="fa-solid fa-folder-plus text-6xl text-black mb-4"></i>
+                        <h3 class="text-3xl font-black text-black uppercase tracking-widest">创建课程</h3>
+                    </div>
+                    <div class="bg-cyan w-full border-brutal shadow-brutal p-8 flex flex-col items-center transform rotate-3 btn-brutal cursor-pointer hover:bg-cyan-400">
+                        <i class="fa-solid fa-link text-6xl text-black mb-4"></i>
+                        <h3 class="text-3xl font-black text-black uppercase tracking-widest">加入课程</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">02 资料解析加载页</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="status-bar"><span>9:41</span><span><i class="fa-solid fa-signal mr-1"></i><i class="fa-solid fa-wifi mr-1"></i><i class="fa-solid fa-battery-full"></i></span></div>
+                <div class="home-indicator"></div>
+                
+                <div class="iphone-content bg-pastel-grey bg-graph-paper flex justify-center items-center relative border-brutal border-t-0 overflow-hidden">
+                    
+                    <div class="absolute inset-0 z-0 text-3xl text-gray-900 opacity-10 grid grid-cols-4 gap-x-12 gap-y-16 p-6 font-black">
+                        🧠 💡 🤔 ✨ 📝 📚 🤯 🧐 💾 🖥️ 📡 🌐 🤖
+                    </div>
+
+                    <div class="relative z-10 bg-paper-white w-4/5 border-brutal shadow-brutal-lg p-8 flex flex-col items-center transform rotate-2">
+                        <i class="fa-solid fa-file-code text-6xl text-black mb-6 animate-pulse"></i>
+                        <h2 class="text-2xl font-black text-black tracking-wide mb-4">资料解析中...</h2>
+                        <div class="w-full h-6 border-brutal bg-pastel-grey relative overflow-hidden">
+                            <div class="absolute top-0 left-0 h-full bg-lime border-r-2 border-black w-3/4 animate-pulse"></div>
+                        </div>
+                        <p class="text-xs font-bold text-gray-500 mt-2 uppercase">Parsing Data</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">03 章节选择</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="home-indicator"></div>
+                <div class="iphone-content bg-pastel-yellow pt-24 px-6 border-brutal">
+                    <h1 class="text-4xl font-black mb-8 text-black uppercase border-b-4 border-black pb-2">课程大纲</h1>
+                    <div class="relative flex flex-col gap-4">
+                        <div class="bg-lime border-brutal shadow-brutal p-6 relative z-20 transform -rotate-1">
+                            <div class="bg-black text-white text-xs font-bold inline-block px-2 py-1 mb-2">CURRENT</div>
+                            <h3 class="text-2xl font-black text-black mb-4">第一章：引言</h3>
+                            <button class="w-full bg-paper-white border-brutal shadow-brutal-sm text-black font-black py-2 btn-brutal uppercase tracking-wider">Start <i class="fa-solid fa-arrow-right ml-2"></i></button>
+                        </div>
+                        <div class="bg-paper-white border-brutal shadow-brutal-sm p-6 relative z-10 transform rotate-1">
+                            <h3 class="text-xl font-black text-black">第二章：关系数据库</h3>
+                        </div>
+                        <div class="bg-pastel-grey border-brutal p-6 relative z-0">
+                            <h3 class="text-xl font-bold text-gray-500">第三章：SQL语言</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">04 诊断前导</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="home-indicator"></div>
+                <div class="iphone-content bg-graph-blue flex flex-col justify-center items-center px-6 relative">
+                    <div class="bg-primary w-full border-brutal shadow-brutal-lg p-10 flex flex-col items-center z-10 transform rotate-1">
+                        <i class="fa-solid fa-brain text-7xl text-black mb-6"></i>
+                        <h2 class="text-4xl font-black text-black text-center leading-none">7题前置诊断</h2>
+                        <div class="h-1 w-full bg-black my-4"></div>
+                        <p class="text-black font-bold text-center uppercase">System Check</p>
+                    </div>
+                    <button class="absolute bottom-20 w-3/4 bg-magenta text-white font-black text-2xl py-4 border-brutal shadow-brutal btn-brutal z-20 transform -rotate-2">
+                        开始检测
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">05 核心作答</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="home-indicator"></div>
+                <div class="iphone-content bg-graph-paper flex justify-center items-center px-4 relative overflow-hidden">
+                    <div class="absolute w-11/12 h-[65%] bg-pastel-grey border-brutal top-[19%] z-10 transform rotate-3 opacity-80"></div>
+                    <div class="w-full bg-paper-white border-brutal shadow-brutal-lg p-6 z-20 flex flex-col h-[65%] transform -rotate-1">
+                        <div class="bg-black text-white px-3 py-1 font-black text-sm w-max mb-6 border-brutal">Q 1 / 7</div>
+                        <h3 class="text-2xl font-black text-black mb-6 leading-snug">在关系代数中，用于从关系中选出满足给定条件的元组的操作是？</h3>
+                        <div class="space-y-4 flex-grow">
+                            <div class="w-full p-4 border-brutal shadow-brutal-sm bg-primary font-black text-black cursor-pointer btn-brutal">A. 选择 (Selection)</div>
+                            <div class="w-full p-4 border-brutal bg-paper-white font-bold text-black cursor-pointer hover:bg-pastel-yellow">B. 投影 (Projection)</div>
+                            <div class="w-full p-4 border-brutal bg-paper-white font-bold text-black cursor-pointer hover:bg-pastel-yellow">C. 连接 (Join)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">08 简答输入</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="home-indicator"></div>
+                <div class="iphone-content bg-graph-blue flex justify-center items-center px-4 relative">
+                    <div class="w-full bg-paper-white border-brutal shadow-brutal p-6 z-20 flex flex-col h-[65%]">
+                        <span class="bg-cyan border-brutal text-black text-xs px-2 py-1 w-max mb-4 font-black uppercase">CODE / TEXT</span>
+                        <h3 class="text-xl font-black text-black mb-4">请简述什么是“实体完整性约束”？</h3>
+                        <textarea class="w-full flex-grow bg-pastel-grey border-brutal p-4 focus:outline-none focus:bg-white resize-none mb-4 font-mono font-bold" placeholder="> TYPE HERE..."></textarea>
+                        <button class="w-full bg-primary text-black font-black text-xl py-3 border-brutal shadow-brutal btn-brutal">提交 SUBMIT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">09 反馈：正确</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="home-indicator"></div>
+                <div class="iphone-content bg-graph-paper flex justify-center items-center px-4 relative overflow-hidden">
+                    <div class="w-full bg-paper-white border-brutal p-6 z-10 flex flex-col h-[65%] scale-95 opacity-50 grayscale">
+                        <h3 class="text-lg font-bold text-black mb-4">关系代数...</h3>
+                    </div>
+                    <div class="absolute w-4/5 bg-lime border-brutal shadow-brutal-lg p-8 z-30 flex flex-col items-center transform rotate-2">
+                        <i class="fa-solid fa-check text-6xl text-black mb-2" style="-webkit-text-stroke: 2px black;"></i>
+                        <h2 class="text-3xl font-black text-black mt-2">回答正确！</h2>
+                        <div class="mt-4 bg-paper-white border-brutal px-4 py-1 font-black">+10 EXP</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">10 反馈：错误</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="home-indicator"></div>
+                <div class="iphone-content bg-graph-paper flex justify-center items-center px-4 relative">
+                    <div class="w-full bg-paper-white border-brutal p-6 z-10 flex flex-col h-[65%] scale-95 opacity-80grayscale">
+                        <h3 class="text-lg font-bold text-black mb-4">简述实体完整性...</h3>
+                    </div>
+                    <div class="absolute bottom-12 w-11/12 bg-orange border-brutal shadow-brutal p-6 z-30 transform -rotate-1">
+                        <div class="flex items-center gap-3 mb-4 bg-paper-white border-brutal w-max px-2 py-1">
+                            <i class="fa-solid fa-robot text-black"></i>
+                            <span class="font-black text-black text-sm uppercase">AI GUIDANCE</span>
+                        </div>
+                        <h3 class="text-2xl font-black text-black mb-2">思路偏了哦...</h3>
+                        <p class="text-black font-bold text-sm leading-relaxed border-l-4 border-black pl-3 bg-paper-white/40">你提到了外键，但这其实属于“参照完整性”。再想想，关于主键的规则是什么？</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <h2 class="text-lg font-black text-black mb-2 bg-primary px-2 border-2 border-black">14 报告薄弱点</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="home-indicator"></div>
+                <div class="iphone-content bg-pastel-yellow pt-16 px-6 border-brutal border-t-0">
+                    <h1 class="text-4xl font-black mb-6 text-black uppercase">最终报告</h1>
+                    <div class="bg-paper-white border-brutal shadow-brutal p-6 w-full mt-4">
+                        <h2 class="text-xl font-black text-black mb-6 bg-primary inline-block px-2 py-1 border-brutal"><i class="fa-solid fa-fire text-black mr-2"></i>薄弱点分析</h2>
+                        <div class="flex flex-wrap gap-4">
+                            <span class="bg-magenta border-brutal shadow-brutal-sm px-4 py-2 text-white font-black text-sm transform -rotate-2 cursor-pointer btn-brutal">参照完整性</span>
+                            <span class="bg-primary border-brutal shadow-brutal-sm px-4 py-2 text-black font-black text-sm transform rotate-1 cursor-pointer btn-brutal">连接查询</span>
+                            <span class="bg-pastel-grey border-brutal px-4 py-2 text-black font-bold text-sm cursor-pointer hover:bg-gray-200">关系代数投影</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
